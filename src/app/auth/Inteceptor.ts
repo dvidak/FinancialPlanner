@@ -5,7 +5,7 @@ import {Observable} from "../../../node_modules/rxjs";
 @Injectable()
 export class Interceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const url = 'http://gamenightproject.herokuapp.com';
+        const url = 'http://localhost:1000';
         req = req.clone({
             url: url + req.url
         });

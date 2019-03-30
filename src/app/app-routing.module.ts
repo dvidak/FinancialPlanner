@@ -4,15 +4,16 @@ import {ComOneComponent} from "./components/com-one/com-one.component"
 import {ComTwoComponent} from "./components/com-two/com-two.component";
 import {ComThreeComponent} from "./components/com-three/com-three.component";
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuardService as AuthGuard } from '../app/auth/auth-guard.service'; 
 
 
 
 const routes: Routes = [
      { path: '', component: LoginComponent},
-     { path: 'login', component: LoginComponent},
-     { path: 'dva', component: ComTwoComponent},
-     { path: 'tri', component: ComThreeComponent},
-];
+     { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+     { path: 'dva', component: ComTwoComponent, canActivate: [AuthGuard]  },
+     { path: 'tri', component: ComThreeComponent,canActivate: [AuthGuard] },
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

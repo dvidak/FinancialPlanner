@@ -5,13 +5,14 @@ import { RegistrationModalComponent } from '../registration-modal/registration-m
 import { AuthLoginInfo } from "../../auth/login-info"
 import { AuthService } from "../../auth/authentication.service";
 import { Router } from "@angular/router";
-import { TokenStorageService } from "../../auth/token-storage.service";
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [AuthService]
+
 })
 export class LoginComponent implements OnInit {
   hide: boolean;
@@ -24,7 +25,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
               private authService: AuthService,
-              private tokenStorage: TokenStorageService,
               private router: Router) { }
 
   ngOnInit() {
@@ -52,7 +52,9 @@ export class LoginComponent implements OnInit {
               console.log(data);
               if(data.success){
                   console.log("prošao login");
-                  this.tokenStorage.saveToken(data.token);
+                  console.log(data.data.token);
+                  this.authService.setToken(data.data.token);
+                  console.log(data.data.token);
                   this.isLoginFailed = false;
                   this.isLoggedIn = true;
                   this.router.navigateByUrl('/dva');
@@ -65,7 +67,6 @@ export class LoginComponent implements OnInit {
           error => {
               console.log("Pukao sam")
               console.log(error);
-              this.errorMessage = error.error.message;
               this.isLoginFailed = true;
           }
       );

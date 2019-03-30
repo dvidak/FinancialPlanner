@@ -3,10 +3,6 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationInfo } from "../../auth/registration-info";
 import { AuthService } from "../../auth/authentication.service";
-
-
-
-
 import { Router } from '@angular/router';
 
 

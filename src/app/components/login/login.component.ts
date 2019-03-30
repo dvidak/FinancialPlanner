@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { RegistrationModalComponent } from '../registration-modal/registration-modal.component';
+import { AuthLoginInfo } from "../../auth/login-info"
+import { AuthService } from "../../auth/authentication.service";
+import { Router } from "@angular/router";
+import { TokenStorageService } from "../../auth/token-storage.service";
+
 
 @Component({
   selector: 'app-login',
@@ -9,16 +14,21 @@ import { RegistrationModalComponent } from '../registration-modal/registration-m
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  submitted = false;
+  hide: boolean;
+  loginForm: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  private loginInfo: AuthLoginInfo;
 
-  constructor(private modalService: NgbModal) { }
+
+  constructor(private modalService: NgbModal,
+              private authService: AuthService,
+              private tokenStorage: TokenStorageService,
+              private router: Router) { }
 
   ngOnInit() {
-    this.loginForm = new FormGroup({
-      username: new FormControl('',Validators.required),
-      password: new FormControl('',[Validators.required, Validators.minLength(6)]),
-    });
+   
   }
 
   openFormModal() {
@@ -30,13 +40,34 @@ export class LoginComponent implements OnInit {
       console.log(error);
     });
   }
-
-  get f() { return this.loginForm.controls; }
-
-  private submitForm() {
-    this.submitted = true;
-        if (this.loginForm.invalid) {
-            return;
-        }
+  
+  onSubmit() {
+      
+    this.loginInfo = new AuthLoginInfo(
+        this.loginForm.username,
+        this.loginForm.password);
+     
+    this.authService.attemptAuth(this.loginInfo).subscribe(
+          data => {
+              console.log(data);
+              if(data.success){
+                  console.log("prošao login");
+                  this.tokenStorage.saveToken(data.token);
+                  this.isLoginFailed = false;
+                  this.isLoggedIn = true;
+                  this.router.navigateByUrl('/dva');
+              }else{
+                this.isLoginFailed = true;
+                this.errorMessage = "Neuspješna prijava. Pokušajte ponovo";
+                console.log("fail login");
+              }
+          },
+          error => {
+              console.log("Pukao sam")
+              console.log(error);
+              this.errorMessage = error.error.message;
+              this.isLoginFailed = true;
+          }
+      );
   }
 }

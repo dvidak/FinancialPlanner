@@ -1,66 +1,41 @@
-<div class="modal-header">
-  <h4 class="modal-title">Registracija </h4>
-  <button type="button" 
-          class="close" 
-         (click)="activeModal.dismiss('Cross click')">
-  </button>
-</div>
-<form [formGroup]="myForm" (ngSubmit)="submitForm()">
+<div class="registration" mat-dialog-content>
+  <div class="modal-header">
+    <h4 class="modal-title">Registriraj se </h4>
+    <button type="button" class="close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+<form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
   <div class="modal-boy">
-    <div class="container">
-      <div class="form-group">
-        <label>Ime i prezime</label>
-        <input type="text" 
-               formControlName="fullname" 
-               class="form-control" 
-               [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }"
-               required />
-        <div *ngIf="submitted && f.fullname.errors" 
-              class="invalid-feedback">
-              <div *ngIf="f.fullname.errors.required">Potrebno je unesti ime i prezime</div>
-        </div>
+      <mat-form-field id="full_name" appearance="outline">
+          <mat-label>Ime i prezime</mat-label>
+          <input matInput 
+                 name="full_name" 
+                 [(ngModel)]="registerForm.full_name" 
+                 #full_name="ngModel" required>
+          <mat-error *ngIf="f.submitted && full_name.invalid && full_name.errors.required">Ime i prezime je obavezno!</mat-error>
+      </mat-form-field>
+      <mat-form-field id="username" appearance="outline">
+          <mat-label>Korisničko ime</mat-label>
+          <input matInput 
+                name="username" 
+                [(ngModel)]="registerForm.username" 
+                #username="ngModel" required minlength="3">
+          <mat-error *ngIf="f.submitted && username.invalid && username.errors.required">Korisničko ime je obavezno!</mat-error>
+          <mat-error *ngIf="f.submitted && username.invalid && username.errors.minlength">Korisničko ime mora imati više od 3 znaka!</mat-error>
+      </mat-form-field>
+      <mat-form-field id="password" appearance="outline">
+          <mat-label>Lozinka</mat-label>
+          <input matInput 
+                 type="password" 
+                 name="password" 
+                 [(ngModel)]="registerForm.password" 
+                 #password="ngModel" required minlength="6">
+          <mat-error *ngIf="f.submitted && password.invalid && password.errors.required">Lozinka je obavezna!</mat-error>
+          <mat-error *ngIf="f.submitted && password.invalid && password.errors.minlength">Lozinka mora imati više od 6 znakova!</mat-error>
+        </mat-form-field>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary btn-block"> Registriraj se</button>
+          <button class="btn btn-secondary btn-block" (click)="activeModal.dismiss('Cross click')">Odustani</button>
       </div>
-      <div class="form-group">
-          <label>Korisničko ime</label>
-          <input type="text" 
-                 formControlName="username" 
-                 class="form-control" 
-                 [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-                 required />
-          <div *ngIf="submitted && f.username.errors" 
-                class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">Potrebno je unesti korisničko ime</div>
-          </div>
-    </div>
-    <div class="form-group">
-        <label>Lozinka</label>
-        <input type="password" 
-               formControlName="password" 
-               class="form-control" 
-               [ngClass]="{ 'is-invalid': submitted && f.password.errors }" 
-               required/>
-        <div *ngIf="submitted && f.password.errors" 
-              class="invalid-feedback">
-              <div *ngIf="f.password.errors.required">Potrebno je unesti lozinku</div>
-        </div>
-  </div>
-  <div class="form-group">
-      <label>Potvrdi lozinku</label>
-      <input type="password" 
-             formControlName="confirmpassword" 
-             class="form-control" 
-             [ngClass]="{ 'is-invalid': submitted && f.confirmpassword.errors }" 
-             required/>
-      <div *ngIf="submitted && (f.confirmpassword !== f.password) "
-            class="invalid-feedback">
-            <div *ngIf="f.confirmpassword.errors.required">Lozinke se ne podudaraju</div>
-      </div>
-  </div>
-  </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-success">
-      Registriraj se
-    </button>
-  </div>
-</form>
+  </div>   
+</form> 
+</div>

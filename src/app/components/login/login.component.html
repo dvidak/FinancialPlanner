@@ -1,30 +1,24 @@
 <div class="login">
-	<h2>Prijavite se </h2>
-    <form method="post">
-       <div class="form-group">
-              <label>Korisničko ime ili email</label>
-                     <input type="text" 
-                            formControlName="username" 
-                            class="form-control" 
-                            [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-                            required />
-                     <div *ngIf="submitted && f.username.errors" 
-                           class="invalid-feedback">
-                            <div *ngIf="f.username.errors.required">Potrebno je unesti korisničko ime</div>
-                     </div>
-       </div>              
-       <div class="form-group">
-              <label>Lozinka</label>
-                     <input type="password" 
-                            formControlName="password" 
-                            class="form-control" 
-                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                            required />
-                     <div *ngIf="submitted && f.password.errors" 
-                           class="invalid-feedback">
-                            <div *ngIf="f.password.errors.required">Potrebno je unesti lozinku</div>
-                     </div>
-                     </div>
+    <h2>Prijavite se </h2>
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+              <mat-form-field class="username">
+              <input matInput 
+                     placeholder="Korisničko ime ili email" 
+                     name="username" 
+                     [(ngModel)]="loginForm.username" 
+                     #username="ngModel" required>
+              <mat-error class="error" *ngIf="f.submitted && username.invalid && username.errors.required">Unesite korisničko ime</mat-error>
+       </mat-form-field>
+       <br>
+       <mat-form-field class="password">
+              <input matInput 
+                     placeholder="Lozinka" 
+                     name="password" 
+                     type="password"
+                     [(ngModel)]="loginForm.password" 
+                     #password="ngModel" required>
+              <mat-error class="error" *ngIf="f.submitted && password.invalid && password.errors.required">Unesite lozinku</mat-error>
+       </mat-form-field>
       <button type="submit" 
               class="btn btn-primary btn-block"> Logiraj se
        </button>

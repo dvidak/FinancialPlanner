@@ -1,0 +1,32 @@
+.modal-header{
+    background-color:#292b2d;
+    color: lightgrey;
+}
+
+.modal-boy{
+    padding: 10px;
+    background-color: lightgrey;
+}
+
+mat-form-field {
+    margin-top: -0.5em;
+    color: #292b2d;;   
+}
+
+.mat-raised-button {
+    background-color: #1a2028;
+    color: #dcdce8;
+    margin-left: 10px;
+}
+
+#full_name {
+    width: 100%;
+}
+
+#username {
+    width: 100%;
+}
+
+#password {
+    width: 100%;
+}

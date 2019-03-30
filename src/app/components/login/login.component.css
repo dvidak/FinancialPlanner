@@ -1,19 +1,16 @@
 .login { 
-    border: 1px solid;
+	border: 2px solid;
+	border-radius: 15px;
     padding: 30px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	text-align: center;
 	margin: -100px 0 0 -200px;
-	width:400px;
-	height:350px;
+	width:350px;
+	background-color:#d7e0e0;
 }
-input { 
-	width: 100%; 
-	margin-bottom: 10px; 
-	padding: 10px;
-	font-size: 13px;
-	color: #fff;
-	border: 1px solid rgba(0,0,0,0.3);
-    border-radius: 4px;	
+
+.error{
+	text-align: center;
 }

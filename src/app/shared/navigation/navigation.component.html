@@ -1,5 +1,5 @@
 <div class="navigation">
-  <a href="#">Link</a>
-  <a href="/dva">Link</a>
-  <a href="/tri">Link</a>
+  <a  *ngIf='isVisible()' routerLink="/income">Prihodi</a>
+  <a  *ngIf='isVisible()' routerLink="/items">Troškovi</a>
+  <a *ngIf='isVisible()' routerLink="/tri">Evidencija</a>
 </div>

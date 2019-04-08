@@ -28,10 +28,6 @@ export class RegistrationModalComponent {
 
   }
 
- 
-
-
-
   onSubmit () {
       this.registrationInfo = new RegistrationInfo(
         this.registerForm.full_name,

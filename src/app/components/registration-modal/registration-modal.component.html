@@ -1,7 +1,7 @@
 <div class="registration" mat-dialog-content>
   <div class="modal-header">
     <h4 class="modal-title">Registriraj se </h4>
-    <button type="button" class="close" (click)="activeModal.dismiss('Cross click')"></button>
+    <button mat-icon-button color="warn" (click)="activeModal.dismiss('Cross click')"> <mat-icon>close</mat-icon></button>
   </div>
 <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
   <div class="modal-boy">

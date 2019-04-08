@@ -1,0 +1,13 @@
+.mat-form-field {
+    width: 80%;
+}
+
+.newItem{
+  margin: 30px;
+  z-index: 10000000 !important;
+}
+
+.select{
+  margin-left: 5px;
+}
+      

@@ -51,13 +51,15 @@ export class LoginComponent implements OnInit {
           data => {
               console.log(data);
               if(data.success){
-                  console.log("prošao login");
-                  console.log(data.data.token);
-                  this.authService.setToken(data.data.token);
-                  console.log(data.data.token);
+                  console.log(data);
+                  console.log(data.token);
+                  this.authService.setToken(data.token);
+                  this.authService.saveUsername(this.loginForm.username);
+                  this.authService.saveUserID(data.id)
+                  console.log(data.token);
                   this.isLoginFailed = false;
                   this.isLoggedIn = true;
-                  this.router.navigateByUrl('/dva');
+                  this.router.navigateByUrl('/items');
               }else{
                 this.isLoginFailed = true;
                 this.errorMessage = "Neuspješna prijava. Pokušajte ponovo";

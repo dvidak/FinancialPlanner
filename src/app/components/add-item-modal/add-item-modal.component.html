@@ -1,0 +1,67 @@
+<div class="newItem">
+      <h4>Dodaj ... </h4>
+      <br>
+        <form  (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+  
+          <mat-radio-group
+            [(ngModel)]="type" 
+            [ngModelOptions]="{standalone: true}">
+          <mat-radio-button class="select"
+                *ngFor="let option of options" [value]="option" >
+                {{option}}
+          </mat-radio-button>
+          </mat-radio-group>
+
+         
+          <ng-container *ngIf="type === 'Primanje'">
+            <mat-form-field>
+                  <mat-select placeholder="Odaberi vrstu primanja" 
+                              (ngModelChange)="selectedSub($event)"  required name="selected" 
+                              [(ngModel)]="form.selected" #selected="ngModel">
+                      <mat-option *ngFor="let sub of subcategoryIncome" 
+                                  [value]="sub.id">{{sub.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </ng-container>
+          <ng-container *ngIf="type === 'Trošak'">
+              <mat-form-field>
+                  <mat-select placeholder="Odaberi vrstu troška" 
+                              (ngModelChange)="selectedSub($event)"  required name="selected" 
+                              [(ngModel)]="form.selected" #selected="ngModel">
+                      <mat-option *ngFor="let sub of subcategoryExpense" 
+                                  [value]="sub.id">{{sub.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </ng-container>
+        <mat-form-field>
+            <input matInput placeholder="Opis" 
+                   name="description" 
+                   [(ngModel)]="form.description" 
+                   #name="ngModel" required>
+            <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Opis je obavezan</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Iznos" 
+            name="amount" 
+            [(ngModel)]="form.amount" 
+            #name="ngModel" required>
+        <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Iznos je obavezan</mat-error>
+        </mat-form-field>        
+      
+        <mat-form-field class="picker">
+            <input matInput [matDatepicker]="pickerFrom" placeholder="Odaberi datum" 
+                    name="date" 
+                    [(ngModel)]="form.date" 
+                    #date="ngModel" required>
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFrom></mat-datepicker>
+            <mat-error *ngIf="f.submitted && date.invalid && date.errors.required">Datum je obavezan</mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" (click)="closeDialog()">Odustani</button>
+          <button mat-raised-button color="primary">Dodaj novi</button>
+
+      </form>
+    
+    </div>   
+  

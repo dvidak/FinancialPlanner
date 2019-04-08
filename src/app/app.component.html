@@ -1,5 +1,12 @@
 <div class="app">
 <div class="jumbotron">
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <ul class="nav navbar-nav ml-auto">
+      <i  *ngIf='isVisible()' (click)="openProfile()"> {{ username }} </i>
+      <br>
+      <i class="material-icons signOutButton" (click)="onClick()" *ngIf='isVisible()'>exit_to_app</i>
+  </ul>
+  </nav>
   <h1>Financijski planer</h1>
 </div>
 
@@ -7,7 +14,7 @@
  <app-navigation></app-navigation>
 </div>
 
-<div class="row">
+<div>
   <router-outlet></router-outlet>
 </div>
 <div>

@@ -4,15 +4,17 @@ import { AuthService } from './authentication.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  constructor(public auth: AuthService, public router: Router) {}
+  constructor(public auth: AuthService, 
+                public router: Router) {}
   
   canActivate() {
     console.log("ušao u can activate");
-    if (!this.auth.isTokenExpired()) {
+    if (!this.auth.isLoggedin()) {
+        console.log("nije logiran")
+        this.router.navigateByUrl('/login');
+        return false;
+    }
+      console.log("logiran je");
       return true;
     }
-
-    this.router.navigate(['/login']);
-    return false;
-  }
 }

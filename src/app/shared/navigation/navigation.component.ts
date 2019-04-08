@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {AuthService} from "../../auth/authentication.service";
+
+
 
 @Component({
   selector: 'app-navigation',
@@ -6,10 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  show: boolean = false;
 
-  constructor() { }
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
+
+  isVisible() {
+    if (this.router.url == '/' || this.router.url == '/login') {
+       return false;
+    }else{
+        return true;
+    }
+  }
+
 
 }

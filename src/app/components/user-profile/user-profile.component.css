@@ -1,0 +1,18 @@
+.container{
+    margin-top: 20px;
+    width: 60%;
+}
+
+.material-icons{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 35%;
+    border: 3px solid;
+    border-radius: 50px;
+    font-size: 150px;
+    background: lightblue;
+}
+
+.input{
+    border: 2p solid;
+}

@@ -12,8 +12,6 @@ import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 
 
-
-
 @Component({
   selector: 'app-add-item-modal',
   templateUrl: './add-item-modal.component.html',
@@ -37,8 +35,7 @@ export class AddItemModalComponent implements OnInit {
 
   itemInfo: newItem;
 
-  constructor(private matDialogRef: MatDialogRef<ItemsComponent>,
-              private dialog: MatDialog,
+  constructor(public dialogRef: MatDialogRef<ItemsComponent>,
               private itemsService: ItemsService,
               private authService: AuthService,
               private subcategoryService: SubcategoryService) { }
@@ -92,12 +89,10 @@ export class AddItemModalComponent implements OnInit {
       console.log(this.itemInfo);
       this.itemsService.newItem(this.itemInfo).subscribe();
       this.closeDialog();
-      window.location.reload();
-
   }
 
   closeDialog() {
-    this.matDialogRef.close();
+    this.dialogRef.close();
   }
 
   selectedSub(subItem){

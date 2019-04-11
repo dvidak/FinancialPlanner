@@ -30,6 +30,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatRadioModule,
+  MatExpansionModule,
   MatCheckboxModule,
   MatButtonModule,
   MatDatepickerModule, 
@@ -44,6 +45,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { AuthGuardService } from './auth/auth-guard.service';
 import { AddItemModalComponent } from './components/add-item-modal/add-item-modal.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { SavingsComponent } from './components/savings/savings.component';
+import { AddSavingModalComponent } from './components/add-saving-modal/add-saving-modal.component';
 
 
 
@@ -58,7 +61,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     LoginComponent,
     RegistrationModalComponent,
     AddItemModalComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    SavingsComponent,
+    AddSavingModalComponent
   ],
   imports: [
     JwtModule.forRoot({
@@ -74,6 +79,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     AppRoutingModule,
     MatCardModule,  
     MatFormFieldModule,
+    MatExpansionModule,
     MatIconModule,
     MatSelectModule,
     MatCheckboxModule,
@@ -96,7 +102,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
   bootstrap: [AppComponent],
   entryComponents : [ 
     RegistrationModalComponent,
-    AddItemModalComponent
+    AddItemModalComponent,
+    AddSavingModalComponent
 
   ]
 })

@@ -23,6 +23,7 @@ export class ItemsComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
+    console.log("dohvacam");
     this.getItems();
   }
 

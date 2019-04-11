@@ -18,8 +18,6 @@ export class AppComponent implements OnInit {
     username : string;
   
     ngOnInit() {
-      this.username= this.auth.getUsername();
-
     }
 
     onClick(){
@@ -36,6 +34,7 @@ export class AppComponent implements OnInit {
       if (this.router.url == '/' || this.router.url == '/login') {
         return false;
       }else{
+        this.username= this.auth.getUsername();
         return true;
     }
 }

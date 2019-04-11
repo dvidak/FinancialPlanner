@@ -22,13 +22,16 @@ export class ItemsService {
                 private auth: AuthService) {
     }
     
-    userId = this.auth.getUserID();
+    userId : string;
 
     getItems(): Observable<ItemView[]> {
+        this.userId = this.auth.getUserID();
+
         return this.http.get<ItemView[]>(`http://localhost:1000/api/items/${this.userId}`);
     }
 
     newItem(newItem : newItem): Observable<newItem[]> {
+        this.userId = this.auth.getUserID();
         return this.http.post<newItem[]>(`http://localhost:1000/api/items`,newItem, httpOptions);
     }
 }

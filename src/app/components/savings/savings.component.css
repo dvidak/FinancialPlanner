@@ -1,0 +1,23 @@
+.left {
+    float: left;
+    width: 50%;
+}
+
+.right {
+    float: left;
+    width: 50%;
+}
+
+.title{
+    margin: 15px;
+    text-align: center;
+}
+
+.contariner{
+    width:80%;
+}
+
+.footer{
+    margin:10px;
+    float: right;
+}

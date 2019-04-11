@@ -1,0 +1,64 @@
+<div class="newItem">
+    <h4>Dodaj ... </h4>
+    <br>
+      <form  (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+          <mat-form-field>
+              <mat-select placeholder="Štedim za ..." 
+                          (ngModelChange)="selectedSub($event)"  required name="selected" 
+                          [(ngModel)]="form.selected" #selected="ngModel">
+                  <mat-option *ngFor="let sub of subcategoryExpense" 
+                              [value]="sub.id">{{sub.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Štedim sa ..." 
+                        (ngModelChange)="selectedUser($event)"  required name="selectedUser" 
+                        [(ngModel)]="form.selectedUsers" #selected="ngModel">
+                <mat-option *ngFor="let user of users" 
+                            [value]="user.id">{{user.username}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Opis" 
+                 name="description" 
+                 [(ngModel)]="form.description" 
+                 #name="ngModel" required>
+          <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Opis je obavezan</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+          <input matInput placeholder="Konačni iznos" 
+          name="amount" 
+          [(ngModel)]="form.amount" 
+          #name="ngModel" required>
+      <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Iznos je obavezan</mat-error>
+      </mat-form-field>
+      
+      <mat-form-field>
+          <input matInput placeholder="Početni iznos" 
+          name="amount" 
+          [(ngModel)]="form.amount_init" 
+          #name="ngModel" required>
+      <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Iznos je obavezan</mat-error>
+      </mat-form-field>   
+
+
+      <mat-form-field class="picker">
+          <input matInput [matDatepicker]="pickerFrom" placeholder="Odaberi datum početka štednje" 
+                  name="date" 
+                  [(ngModel)]="form.date" 
+                  #date="ngModel" required>
+          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFrom></mat-datepicker>
+          <mat-error *ngIf="f.submitted && date.invalid && date.errors.required">Datum je obavezan</mat-error>
+        </mat-form-field>
+        
+    <div class="footer">
+        <button mat-raised-button color="primary" (click)="closeDialog()">Odustani</button>
+        <button mat-raised-button color="primary"> Dodaj novi </button>
+    </div>
+
+    </form>
+
+  </div>   

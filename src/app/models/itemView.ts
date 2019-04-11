@@ -6,10 +6,9 @@ export class ItemView {
     boughtAt: Date;
     boughtBy: number;
     subcategory: {
-        name: string;
+    name: string;
     }
  
-
     constructor(id: number, subcategory_id: number, description: string, amount: string,boughtAt: Date, boughtBy: number) {
        this.id=id;
        this.subcategory_id=subcategory_id;

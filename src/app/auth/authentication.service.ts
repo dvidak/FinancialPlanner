@@ -50,25 +50,32 @@ export class AuthService {
 
     signOut() {
       localStorage.removeItem(TOKEN_NAME);
-      console.log(localStorage.getItem(TOKEN_NAME));
+      localStorage.removeItem(USERNAME_KEY);
+      localStorage.removeItem(USER_ID);
+      console.log("sve smo obrisali")
     }
 
     saveUsername(username: string) {
-      window.sessionStorage.removeItem(USERNAME_KEY);
-      window.sessionStorage.setItem(USERNAME_KEY, username);
+      localStorage.removeItem(USERNAME_KEY);
+      localStorage.setItem(USERNAME_KEY, username);
+      console.log("spremili smo username");
+      console.log(this.getUsername());
     }
 
     getUsername(): string {
-      return sessionStorage.getItem(USERNAME_KEY);
+      return localStorage.getItem(USERNAME_KEY);
     }
 
     saveUserID(id: string){
-      window.sessionStorage.removeItem(USER_ID);
-      window.sessionStorage.setItem(USER_ID, id);
+      localStorage.removeItem(USER_ID);
+      localStorage.setItem(USER_ID, id);
+      console.log("spremili smo userID");
+      console.log(this.getUserID());
+
     }
 
     getUserID(){
-      return sessionStorage.getItem(USER_ID);
+      return localStorage.getItem(USER_ID);
     }
 
 

@@ -57,10 +57,12 @@
             <mat-datepicker #pickerFrom></mat-datepicker>
             <mat-error *ngIf="f.submitted && date.invalid && date.errors.required">Datum je obavezan</mat-error>
           </mat-form-field>
-
+          
+        <div class="footer">
           <button mat-raised-button color="primary" (click)="closeDialog()">Odustani</button>
           <button mat-raised-button color="primary">Dodaj novi</button>
-
+        </div>
+        
       </form>
     
     </div>   

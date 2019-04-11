@@ -1,0 +1,50 @@
+<div class="container">
+<div class="row">
+<div class="right">
+<h4 class="title"> Lista svih mojih štednji </h4>
+<mat-accordion *ngFor="let saving of savings ; let i = index">
+    <mat-expansion-panel  *ngIf="saving.created_by === id ">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Moja štednja
+        </mat-panel-title> 
+        <mat-panel-description>
+            {{saving.date}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>  Štedim za :{{saving.description}}</p>
+      <p>  Cilj mi je :{{saving.amount_init}} kn </p>
+      <p>  Trenutno imam : {{saving.amount}} kn </p>
+      <p>  Fali mi još : {{saving.amount_init - saving.amount}} kn </p>
+      <p>  Početak štednje {{saving.date}}</p>
+      <p>  Štedim s : {{ saving.created_with}}</p>
+     </mat-expansion-panel>
+</mat-accordion>
+</div>
+<div class="left">
+    <h4 class="title"> Lista štednji u kojima sudjelujem </h4>
+    <mat-accordion *ngFor="let saving of savings ; let i = index">
+        <mat-expansion-panel *ngIf="saving.created_with === id">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                 Štednje u kojima sudjeluem
+              </mat-panel-title>
+              <mat-panel-description>
+                  {{saving.date}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>  Štedimo za : {{saving.description}}</p>
+            <p>  Cilj nam je :{{saving.amount_init}} kn </p>
+            <p>  Trenutno imamo : {{saving.amount}} kn </p>
+            <p>  Fali nam još : {{saving.amount_init - saving.amount}} kn </p>
+            <p>  Početak štednje {{saving.date}}</p>
+            <p>  Štedim s : {{ saving.created_by}}</p>
+          </mat-expansion-panel>
+      </mat-accordion>
+</div>
+</div>
+<div class="footer">
+    <button class="btn btn-secondary" 
+    (click)="openDialog()">Dodaj novu štednju</button>
+</div>
+</div>

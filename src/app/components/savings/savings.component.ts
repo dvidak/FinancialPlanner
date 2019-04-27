@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { SavingsService } from 'src/app/services/savings.service';
 import { AuthService } from 'src/app/auth/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 import { SavingsView } from 'src/app/models/savingsView';
 import {MatDialog } from "@angular/material";
 import { AddSavingModalComponent } from "../add-saving-modal/add-saving-modal.component";
+import { UserView } from 'src/app/models/userView';
+import * as moment from 'moment';
+
 
 
 @Component({
@@ -12,6 +16,7 @@ import { AddSavingModalComponent } from "../add-saving-modal/add-saving-modal.co
   styleUrls: ['./savings.component.css']
 })
 export class SavingsComponent implements OnInit {
+
   panelOpenState = false;
   id : string;
   savings: SavingsView [];
@@ -19,13 +24,16 @@ export class SavingsComponent implements OnInit {
   visible : boolean = false;
   creator : boolean =false ;
   docreator: boolean = false;
+  users: UserView [] = [];
 
   constructor(private savingsServce: SavingsService,
               private auth : AuthService,
+              private userService: UserService,
               public dialog: MatDialog)  {}
 
   ngOnInit() {
     this.getSavings();
+    this.getUsers();
     this.id = this.auth.getUserID();
     console.log(this.creator);
     console.log(this.docreator);
@@ -41,6 +49,14 @@ export class SavingsComponent implements OnInit {
                       },error => this.savingsExist=false);
   }
 
+  getUsers(){
+    this.userService.getUsers()
+                    .subscribe( users => {
+                      this.users = users;
+                      this.insertUsers(this.users);
+                    })
+  }
+
   insertSavings(savings: SavingsView []){
     this.savings=savings;
     if(savings === null){
@@ -48,6 +64,11 @@ export class SavingsComponent implements OnInit {
     }
     this.savingsExist=true;
     console.log(this.savings);
+  }
+
+  insertUsers(users : UserView[]){
+    this.users=users;
+    console.log(this.users)
   }
 
   openDialog(): void {

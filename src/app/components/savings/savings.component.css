@@ -15,9 +15,14 @@
 
 .contariner{
     width:80%;
+    background-color: whitesmoke;
 }
 
 .footer{
     margin:10px;
     float: right;
+}
+
+.body{
+    align-content: center;
 }

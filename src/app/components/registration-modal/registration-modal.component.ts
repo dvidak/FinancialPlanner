@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RegistrationModalComponent {
   @Input()id: number;
+  hide: boolean;
   registerForm: any = {};
   isSignedUp = false;
   isSignUpFailed = false;
@@ -29,8 +30,11 @@ export class RegistrationModalComponent {
   }
 
   onSubmit () {
+    this.hide = true;
       this.registrationInfo = new RegistrationInfo(
-        this.registerForm.full_name,
+        this.registerForm.name,
+        this.registerForm.lastname,
+        this.registerForm.email,
         this.registerForm.username,
         this.registerForm.password)
       

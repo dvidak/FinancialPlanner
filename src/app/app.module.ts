@@ -63,7 +63,7 @@ import { AddSavingModalComponent } from './components/add-saving-modal/add-savin
     AddItemModalComponent,
     UserProfileComponent,
     SavingsComponent,
-    AddSavingModalComponent
+    AddSavingModalComponent,
   ],
   imports: [
     JwtModule.forRoot({
@@ -103,8 +103,7 @@ import { AddSavingModalComponent } from './components/add-saving-modal/add-savin
   entryComponents : [ 
     RegistrationModalComponent,
     AddItemModalComponent,
-    AddSavingModalComponent
-
+    AddSavingModalComponent,
   ]
 })
 export class AppModule { }

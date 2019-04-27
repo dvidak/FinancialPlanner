@@ -35,7 +35,6 @@ export class AddSavingModalComponent implements OnInit {
               private authService: AuthService,
               private subcategoryService: SubcategoryService,
               private savingsService: SavingsService,
-
               private userService: UserService) { }
 
   ngOnInit() {

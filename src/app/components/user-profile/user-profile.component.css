@@ -1,6 +1,9 @@
 .container{
     margin-top: 20px;
     width: 60%;
+    border: 2px solid;
+    border-radius: 50px;
+    background-color: #c4acc0;
 }
 
 .material-icons{
@@ -10,7 +13,7 @@
     border: 3px solid;
     border-radius: 50px;
     font-size: 150px;
-    background: lightblue;
+    background:#878386;
 }
 
 .input{

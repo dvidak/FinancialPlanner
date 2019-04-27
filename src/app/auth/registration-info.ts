@@ -1,11 +1,15 @@
 export class RegistrationInfo {
+    name: string;
+    lastname: string;
+    email: string;
     username: string;
-    full_name: string;
     password: string;
 
-    constructor(username: string, full_name: string, password: string) {
+    constructor(name: string, lastname: string, email: string,username: string,password: string) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
         this.username = username;
-        this.full_name = full_name;
         this.password = password;
     }
 }

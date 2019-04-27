@@ -8,9 +8,16 @@
 	text-align: center;
 	margin: -100px 0 0 -200px;
 	width:350px;
-	background-color:#d7e0e0;
+	background-color:#e8d7e3;
 }
-
 .error{
 	text-align: center;
+}
+
+.form-footer{
+	
+}
+
+.btn btn-primary{
+	margin-left: 20px;
 }

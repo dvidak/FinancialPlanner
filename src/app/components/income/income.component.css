@@ -3,35 +3,16 @@
     margin: 0;
     padding: 0;
   }
-   
-  .leftcolumn {
-    float: left;
+  
+  .container{
+    background-color: aliceblue;
     width: 70%;
+    margin-left: 15%;
   }
-  
-
-  .rightcolumn {
-    float: left;
-    width: 30%;
-    background-color: #f1f1f1;
-    padding-left: 20px;
-  }
-  
+ 
+ 
   .card {
     background-color: white;
     padding: 20px;
   }
   
-  @media screen and (max-width: 800px) {
-    .leftcolumn, .rightcolumn {
-      width: 100%;
-      padding: 0;
-    }
-  }
-  
-  @media screen and (max-width: 400px) {
-    .topnav a {
-      float: none;
-      width: 100%;
-    }
-  }

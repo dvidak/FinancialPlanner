@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../services/user.service";
 import { UserView } from '../../models/userView'
 
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -29,5 +30,7 @@ export class UserProfileComponent implements OnInit {
     this.user=user;
     console.log(this.user);
   }
+
+  
 
 }

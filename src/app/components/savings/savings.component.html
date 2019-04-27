@@ -8,16 +8,23 @@
         <mat-panel-title>
           Moja štednja
         </mat-panel-title> 
-        <mat-panel-description>
-            {{saving.date}}
+        <mat-panel-description *ngIf="saving.amount_init < saving.amount">
+            <p> AKTIVNA <p>
+        </mat-panel-description>
+        <mat-panel-description *ngIf="saving.amount_init >= saving.amount">
+          <p> ZATVORENA </p>
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <div class="body">
       <p>  Štedim za :{{saving.description}}</p>
       <p>  Cilj mi je :{{saving.amount_init}} kn </p>
-      <p>  Trenutno imam : {{saving.amount}} kn </p>
+      <p>  Trenutno imam : {{saving.amount}} kn  <i class="material-icons" > edit </i> </p> 
       <p>  Fali mi još : {{saving.amount_init - saving.amount}} kn </p>
       <p>  Početak štednje {{saving.date}}</p>
-      <p>  Štedim s : {{ saving.created_with}}</p>
+      <p *ngIf="saving.created_with === null">  Štedim samostalno </p>
+      <p *ngIf="saving.created_with !== null">  Štedim s {{ saving.created_with }} </p>
+
+      </div>  
      </mat-expansion-panel>
 </mat-accordion>
 </div>
@@ -27,17 +34,20 @@
         <mat-expansion-panel *ngIf="saving.created_with === id">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                 Štednje u kojima sudjeluem
+                 Štednja u kojoj sudjeluem
               </mat-panel-title>
-              <mat-panel-description>
-                  {{saving.date}}
+              <mat-panel-description *ngIf="saving.amount_init < saving.amount">
+                  <p> AKTIVNA <p>
+              </mat-panel-description>
+              <mat-panel-description *ngIf="saving.amount_init >= saving.amount">
+                <p> ZATVORENA </p>
               </mat-panel-description>
             </mat-expansion-panel-header>
             <p>  Štedimo za : {{saving.description}}</p>
             <p>  Cilj nam je :{{saving.amount_init}} kn </p>
-            <p>  Trenutno imamo : {{saving.amount}} kn </p>
+            <p>  Trenutno imamo : {{saving.amount}} kn <i class="material-icons" > edit </i> </p>
             <p>  Fali nam još : {{saving.amount_init - saving.amount}} kn </p>
-            <p>  Početak štednje {{saving.date}}</p>
+            <p>  Kraj štednje {{saving.date}}</p>
             <p>  Štedim s : {{ saving.created_by}}</p>
           </mat-expansion-panel>
       </mat-accordion>

@@ -1,3 +1,8 @@
+.newItem{
+    background:white;
+}
+
+
 .mat-form-field {
     width: 80%;
 }
@@ -5,4 +10,5 @@
 .select{
   margin-left: 5px;
 }
+
       

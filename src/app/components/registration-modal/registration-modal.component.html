@@ -5,15 +5,45 @@
   </div>
 <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
   <div class="modal-boy">
-      <mat-form-field id="full_name" appearance="outline">
-          <mat-label>Ime i prezime</mat-label>
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field id="name" appearance="outline">
+          <mat-label>Ime</mat-label>
           <input matInput 
-                 name="full_name" 
-                 [(ngModel)]="registerForm.full_name" 
-                 #full_name="ngModel" required>
-          <mat-error *ngIf="f.submitted && full_name.invalid && full_name.errors.required">Ime i prezime je obavezno!</mat-error>
+                 name="name" 
+                 [(ngModel)]="registerForm.name" 
+                 #name="ngModel" required>
+          <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Ime je obavezno!</mat-error>
       </mat-form-field>
+      </div>
+      <div class="col-md-6">
+      <mat-form-field id="lastname" appearance="outline">
+          <mat-label>Prezime</mat-label>
+          <input matInput 
+                 name="lastname" 
+                 [(ngModel)]="registerForm.lastname" 
+                 #lastname="ngModel" required>
+          <mat-error *ngIf="f.submitted && lastname.invalid && lastname.errors.required"> Prezime je obavezno!</mat-error>
+      </mat-form-field>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-12">
+      <mat-form-field id="email" appearance="outline">
+        <i class="material-icons" matSuffix>mail</i>
+        <mat-label>Email</mat-label>
+        <input matInput 
+               name="email" 
+               [(ngModel)]="registerForm.email" 
+               #email="ngModel" required>
+        <mat-error *ngIf="f.submitted && email.invalid && email.errors.required"> Mail je obavezno!</mat-error>
+    </mat-form-field>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-12">
       <mat-form-field id="username" appearance="outline">
+          <i class="material-icons" matSuffix>portrait</i>
           <mat-label>Korisničko ime</mat-label>
           <input matInput 
                 name="username" 
@@ -22,19 +52,26 @@
           <mat-error *ngIf="f.submitted && username.invalid && username.errors.required">Korisničko ime je obavezno!</mat-error>
           <mat-error *ngIf="f.submitted && username.invalid && username.errors.minlength">Korisničko ime mora imati više od 3 znaka!</mat-error>
       </mat-form-field>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-12">
       <mat-form-field id="password" appearance="outline">
           <mat-label>Lozinka</mat-label>
+          <i class="material-icons" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</i>
           <input matInput 
-                 type="password" 
+                [type]="hide ? 'password' : 'text'"
                  name="password" 
                  [(ngModel)]="registerForm.password" 
                  #password="ngModel" required minlength="6">
           <mat-error *ngIf="f.submitted && password.invalid && password.errors.required">Lozinka je obavezna!</mat-error>
           <mat-error *ngIf="f.submitted && password.invalid && password.errors.minlength">Lozinka mora imati više od 6 znakova!</mat-error>
         </mat-form-field>
+      </div>
+      </div>
       <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-block"> Registriraj se</button>
-          <button class="btn btn-secondary btn-block" (click)="activeModal.dismiss('Cross click')">Odustani</button>
+          <button class="btn btn-secondary" (click)="activeModal.dismiss('Cross click')">Odustani</button>
+          <button type="submit" class="btn btn-primary"> Registriraj se</button>
       </div>
   </div>   
 </form> 

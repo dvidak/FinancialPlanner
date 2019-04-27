@@ -1,9 +1,9 @@
+<div class="leftcolumn">
+<div class="container-fluid">
 <div class ="row">
-<div class="col-md-8">
 <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th >#</th>
         <th >Kategorija</th>
         <th >Opis</th>
         <th >Iznos</th>
@@ -12,7 +12,6 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: p } ; let i=index">
-            <td>{{i+1}}</td>
             <td>{{item.subcategory.name}}</td>
             <td>{{item.description}}</td>
             <td>{{item.amount}}</td>
@@ -20,14 +19,24 @@
         </tr>     
     </tbody>
     <tfoot>
-          <pagination-controls class="pagi" (pageChange)="p = $event"></pagination-controls>
+      <div class="row">        
+        <div class="col-md-8">
+        <pagination-controls class="pagi" (pageChange)="p = $event"></pagination-controls>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+          <button class="btn btn-secondary" (click)="openDialog()"> Dodaj ...  </button>
+        </div>
+      </div>  
     </tfoot>
-
   </table>
-  </div>
-  <div class="col-md-2">
-      <button class="btn btn-secondary btn-block" 
-      (click)="openDialog()">Dodaj novi</button>
-  </div>
-  </div>
-  
+</div>
+</div>
+</div>
+<div class="rightcolumn">
+    <div class="card">
+      <div class="myDiv" id="myDiv">
+          <!-- Chart will appear here -->
+        </div>
+      </div>
+</div>

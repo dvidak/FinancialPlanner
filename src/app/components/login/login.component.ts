@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.hide = true;
    
   }
 
@@ -63,7 +64,7 @@ export class LoginComponent implements OnInit {
               }else{
                 this.isLoginFailed = true;
                 this.errorMessage = "Neuspješna prijava. Pokušajte ponovo";
-                console.log("fail login");
+                alert(this.errorMessage);
               }
           },
           error => {

@@ -1,5 +1,5 @@
 .modal-header{
-    background-color:#292b2d;
+    background-color:#3a2735;
     color: lightgrey;
         
 }
@@ -10,17 +10,25 @@
 }
 
 mat-form-field {
-    margin-top: -0.5em;
-    color: #292b2d;;   
+    color: #3a2735;;   
 }
 
 .mat-raised-button {
-    background-color: #1a2028;
+    background-color: #3a2735;
     color: #dcdce8;
-    margin-left: 10px;
 }
 
-#full_name {
+.btn btn-secondary{
+    float: left;
+}
+
+#name {
+    width: 100%;
+}
+#lastname {
+    width: 100%;
+}
+#email {
     width: 100%;
 }
 

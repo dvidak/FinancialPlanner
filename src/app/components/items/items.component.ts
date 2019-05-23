@@ -26,7 +26,6 @@ export class ItemsComponent implements OnInit {
   lastMonthIncome = 0;
   twoMonthAgoIncome = 0;
 
-
   Plotly: any;
 
 

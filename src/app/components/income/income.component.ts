@@ -40,6 +40,7 @@ export class IncomeComponent implements OnInit {
    Plotly: any;
    hideOther: boolean;
    hideIncome: boolean;
+   isExpenseEmpty: boolean = true;
    hideCurrentIncome : boolean;
    hideCurrentExpense: boolean;
    date : Date = new Date();
@@ -68,9 +69,6 @@ export class IncomeComponent implements OnInit {
      console.log(this.datePicked)
      this.yearSelected = moment(this.datePicked.value,"DD/MM/YYYY").year();
      this.monthSelected = moment(this.datePicked.value,"DD/MM/YYYY").month()+1;
-     console.log("odbaran datum")
-     console.log(this.yearSelected);
-     console.log(this.monthSelected);
      datepicker.close();
      this.calculateCategoryExpenseChartBar();
    }
@@ -110,8 +108,6 @@ export class IncomeComponent implements OnInit {
       this.itemExist = false;
     }
     this.itemExist=true;
-    console.log("itemsi koje smo unjeli za taj datum");
-    console.log(this.itemsForPicked);
     this.calculateCategoryExpenseChartBar();
   }
 
@@ -128,6 +124,7 @@ export class IncomeComponent implements OnInit {
     this.items.forEach(element => {
       var tempDate = new Date (element.boughtAt);
       if(tempDate.getMonth()+1 == month){
+        this.isExpenseEmpty = false;
         if(element.subcategory_id == 4){
           this.itemByCategoryList[4] +=+element.amount;
         }else if(element.subcategory_id == 5){
@@ -145,6 +142,8 @@ export class IncomeComponent implements OnInit {
         }else if(element.subcategory_id == 11){
           this.itemByCategoryList[11] +=+element.amount;        
         }
+      }else{
+        this.isExpenseEmpty = true;
       }
     })
     this.plotCategoryExpense();  
@@ -333,7 +332,7 @@ export class IncomeComponent implements OnInit {
       name: 'režije',
   
       marker: {
-        color: '#3a2735'
+        color: '#82397f'
       }
     };
   
@@ -342,8 +341,8 @@ export class IncomeComponent implements OnInit {
       y: [this.itemByCategoryTwoMonthsAgoList[5], this.itemByCategoryLastMonthList[5], this.itemByCategoryList[5]],
       type: 'bar',
       name: 'prehrana',
-      marker: {
-        color: 'blue'
+      marker:{
+        color: '#998097'
       }
     };
   
@@ -353,7 +352,7 @@ export class IncomeComponent implements OnInit {
       type: 'bar',
       name: 'odijevanje',
       marker: {
-        color: 'yellow'
+        color: '#ddbbe8'
       }
     };
     
@@ -363,7 +362,7 @@ export class IncomeComponent implements OnInit {
       type: 'bar',
       name: 'prijevoz',
       marker: {
-        color: 'green'
+        color: '#6e567c'
       }
     };
   
@@ -373,7 +372,7 @@ export class IncomeComponent implements OnInit {
       type: 'bar',
       name: 'higijena',
       marker: {
-        color: 'red'
+        color: '#c0a9ce'
       }
     };
   
@@ -383,7 +382,7 @@ export class IncomeComponent implements OnInit {
       type: 'bar',
       name: 'zdravlje',
       marker: {
-        color: 'purple'
+        color: '#a374bf'
       }
     };
   
@@ -393,7 +392,7 @@ export class IncomeComponent implements OnInit {
       type: 'bar',
       name: 'dom',
       marker: {
-        color: 'black'
+        color: '#d813d1'
       }
     };
   
@@ -403,7 +402,7 @@ export class IncomeComponent implements OnInit {
       type: 'bar',
       name: 'slobodno vrijeme',
       marker: {
-        color: 'grey'
+        color: '#752672'
       }
     };
   
@@ -493,8 +492,8 @@ export class IncomeComponent implements OnInit {
       y: [this.itemByCategoryTwoMonthsAgoList[2], this.itemByCategoryLastMonthList[2], this.itemByCategoryList[2]],
       type: 'bar',
       name: 'povremena',
-      marker: {
-        color: 'blue'
+      marker:{
+        color: '#ada3b7'
       }
     };
   
@@ -504,7 +503,7 @@ export class IncomeComponent implements OnInit {
       type: 'bar',
       name: 'ostalo',
       marker: {
-        color: 'yellow'
+        color: '#82397f'
       }
     };
 

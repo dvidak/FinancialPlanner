@@ -1,7 +1,7 @@
 <div class="login">
     <h2>Prijavite se </h2>
     <div class="form">
-    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <form (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
               <mat-form-field class="username">
               <i class="material-icons" matSuffix>portrait</i>
               <input matInput 
@@ -22,9 +22,9 @@
                      #password="ngModel" required>
               <mat-error class="error" *ngIf="f.submitted && password.invalid && password.errors.required">Unesite lozinku</mat-error>
        </mat-form-field>
-       <div class="form-footer">
-       <button class="btn btn-secondary" (click)="openFormModal()">Registriraj se</button>
-       <button type="submit" class="btn btn-primary"> Logiraj se</button>
+       <div class="btn-group">
+              <button type="submit" class="btn btn-primary" (click)="onSubmit()"> Logiraj se</button>
+              <button class="btn btn-secondary" (click)="openFormModal()">Registriraj se</button>
        </div>
     </form>
     </div>

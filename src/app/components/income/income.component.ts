@@ -72,7 +72,7 @@ export class IncomeComponent implements OnInit {
      console.log(this.yearSelected);
      console.log(this.monthSelected);
      datepicker.close();
-     this.getItemsByDate();
+     this.calculateCategoryExpenseChartBar();
    }
    
    
@@ -90,19 +90,6 @@ export class IncomeComponent implements OnInit {
                       .subscribe( items => {
                           this.items=items;
                           this.insertItems(this.items)
-                      },error => this.itemExist=false);
-  }
-
-  getItemsByDate(){
-    this.restart();
-    var year = this.yearSelected;
-    var month = this.monthSelected;
-    console.log(year);
-    console.log(month);
-    this.itemsService.getItemsByDate(month ,year)
-                      .subscribe( items => {
-                          this.itemsForPicked=items;
-                          this.insertItemsPickedDate(this.items)
                       },error => this.itemExist=false);
   }
 

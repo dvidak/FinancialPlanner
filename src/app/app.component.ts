@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     }
 
     openProfile(){
-      this.router.navigateByUrl('/profile');
+      this.router.navigateByUrl('/profil');
     }
 
 

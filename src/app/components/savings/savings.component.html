@@ -19,7 +19,7 @@
       <p>  Štedim za :{{saving.description}}</p>
       <p>  Cilj mi je :{{saving.amount_init}} kn </p>
       <p [hidden]="visibleInput[saving.id]">  Trenutno imam : {{saving.amount}} kn 
-          <button (click)="onClick(saving.id)"><i class="material-icons" > edit </i></button>          
+          <button type="button" class="btn btn-info btn-xs" (click)="onClick(saving.id)"><i class="small material-icons" > edit </i></button>          
       </p>
       <p [hidden]="!visibleInput[saving.id]">
           <mat-form-field class="inputNew">
@@ -29,7 +29,7 @@
               pattern="^(\d*\.)?\d+$"
               #name="ngModel" required>
           </mat-form-field>
-          <button (click)="addToSavings(saving.id)"><i class="material-icons" > add </i></button>          
+          <button type="button" class="btn btn-success btn-xs"(click)="addToSavings(saving.id)"><i class="material-icons" > add </i></button>          
       </p> 
       <p>  Fali mi još : {{saving.amount_init - saving.amount}} kn </p>
       <p>  Početak štednje {{saving.date}}</p>

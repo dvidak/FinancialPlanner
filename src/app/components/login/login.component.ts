@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
                   console.log(data.token);
                   this.isLoginFailed = false;
                   this.isLoggedIn = true;
-                  this.router.navigateByUrl('/items');
+                  this.router.navigateByUrl('/pregled');
               }else{
                 this.isLoginFailed = true;
                 this.errorMessage = "Neuspješna prijava. Pokušajte ponovo";

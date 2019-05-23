@@ -17,6 +17,19 @@
   .example-month-picker .mat-calendar-arrow {
     display: none;
   }
+
+
+
+
+  .myCard{
+    color: #3a2735;
+    font-family: 'Gill Sans';
+    margin-top: 50px;
+  }
+
+  .row{
+    background-color: white;
+  }
   
  
   

@@ -12,7 +12,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IncomeComponent } from './components/income/income.component';
 import { ItemsComponent } from './components/items/items.component';
-import { ComThreeComponent } from './components/com-three/com-three.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { LoginComponent } from './components/login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -56,7 +55,6 @@ import { AddSavingModalComponent } from './components/add-saving-modal/add-savin
     AppComponent,
     IncomeComponent,
     ItemsComponent,
-    ComThreeComponent,
     NavigationComponent,
     LoginComponent,
     RegistrationModalComponent,

@@ -25,6 +25,4 @@ export class NavigationComponent implements OnInit {
         return true;
     }
   }
-
-
 }

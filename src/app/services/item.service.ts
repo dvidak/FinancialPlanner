@@ -29,23 +29,7 @@ export class ItemsService {
         return this.http.get<ItemView[]>(`http://localhost:1000/api/items/${this.userId}`);
     }
 
-    getItemsByDate(month : number ,year : number ): Observable<ItemView[]> {
-        this.userId = this.auth.getUserID();
-        console.log(month);
-        console.log(year);
-        var m= String(month);
-        var y= String(year);
-        console.log(m);
-        console.log(y);
-        return this.http.get<ItemView[]>(`http://localhost:1000/api/items`,{
-            params: {
-                userId: this.userId,
-                year: y,
-                month: m,
-              },
-        });
-    }
-
+   
     newItem(newItem : newItem): Observable<newItem[]> {
         this.userId = this.auth.getUserID();
         return this.http.post<newItem[]>(`http://localhost:1000/api/items`,newItem, httpOptions);

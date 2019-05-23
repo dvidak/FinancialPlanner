@@ -92,6 +92,7 @@ export class AddItemModalComponent implements OnInit {
   }
 
   closeDialog() {
+    window.location.reload();
     this.dialogRef.close();
   }
 

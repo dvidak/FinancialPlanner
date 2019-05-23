@@ -99,6 +99,7 @@ export class AddSavingModalComponent implements OnInit {
   }
 
   closeDialog() {
+    window.location.reload();
     this.dialogRef.close();
   }
 

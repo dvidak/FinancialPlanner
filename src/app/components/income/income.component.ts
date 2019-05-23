@@ -260,74 +260,74 @@ export class IncomeComponent implements OnInit {
     this.hideOther = true;
     this.restart();
     if(this.monthSelected === null){
-      var month = this.date.getMonth();
+      var month = this.date.getMonth()+1;
     }else{
        var month = this.monthSelected;
     }
     this.items.forEach(element => {
       var tempDate = new Date (element.boughtAt);
       if(element.subcategory_id ==4){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[4] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[4] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[4] +=+ element.amount;
         }
       }else if(element.subcategory_id ==5){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[5] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[5] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[5] +=+ element.amount;
         }
       }else if(element.subcategory_id ==6){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[6] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[6] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[6] +=+ element.amount;
         }
       }else if(element.subcategory_id ==7){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[7] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[7] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[7] +=+ element.amount;
         }
       }else if(element.subcategory_id ==8){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[8] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[8] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[8] +=+ element.amount;
         }
       }else if(element.subcategory_id ==9){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[9] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[9] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[9] +=+ element.amount;
         }
       }else if(element.subcategory_id ==10){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[10] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[10] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[10] +=+ element.amount;
         }
       }else if(element.subcategory_id ==11){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[11] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[11] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[11] +=+ element.amount;
         }
       }
@@ -340,7 +340,7 @@ export class IncomeComponent implements OnInit {
 
   plotCompareExpense(month: number){
     var trace1 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[4], this.itemByCategoryLastMonthList[4], this.itemByCategoryList[4]],
       type: 'bar',
       name: 'režije',
@@ -351,7 +351,7 @@ export class IncomeComponent implements OnInit {
     };
   
     var trace2 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[5], this.itemByCategoryLastMonthList[5], this.itemByCategoryList[5]],
       type: 'bar',
       name: 'prehrana',
@@ -361,7 +361,7 @@ export class IncomeComponent implements OnInit {
     };
   
     var trace3 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[6], this.itemByCategoryLastMonthList[6], this.itemByCategoryList[6]],
       type: 'bar',
       name: 'odijevanje',
@@ -371,7 +371,7 @@ export class IncomeComponent implements OnInit {
     };
     
     var trace4 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[7], this.itemByCategoryLastMonthList[7], this.itemByCategoryList[7]],
       type: 'bar',
       name: 'prijevoz',
@@ -381,7 +381,7 @@ export class IncomeComponent implements OnInit {
     };
   
     var trace5 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[8], this.itemByCategoryLastMonthList[8], this.itemByCategoryList[8]],
       type: 'bar',
       name: 'higijena',
@@ -391,7 +391,7 @@ export class IncomeComponent implements OnInit {
     };
   
     var trace6 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[9], this.itemByCategoryLastMonthList[9], this.itemByCategoryList[9]],
       type: 'bar',
       name: 'zdravlje',
@@ -401,7 +401,7 @@ export class IncomeComponent implements OnInit {
     };
   
     var trace7 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[10], this.itemByCategoryLastMonthList[10], this.itemByCategoryList[10]],
       type: 'bar',
       name: 'dom',
@@ -411,7 +411,7 @@ export class IncomeComponent implements OnInit {
     };
   
     var trace8 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[11], this.itemByCategoryLastMonthList[11], this.itemByCategoryList[11]],
       type: 'bar',
       name: 'slobodno vrijeme',
@@ -453,34 +453,34 @@ export class IncomeComponent implements OnInit {
     this.hideOther = true;
     this.restart();
      if(this.monthSelected === null){
-      var month = this.date.getMonth();
+      var month = this.date.getMonth()+1;
     }else{
        var month = this.monthSelected;
     }
     this.items.forEach(element => {
       var tempDate = new Date (element.boughtAt);
       if(element.subcategory_id ==1){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[1] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[1] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[1] +=+ element.amount;
         }
       }else if(element.subcategory_id ==2){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[2] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[2] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[2] +=+ element.amount;
         }
       }else if(element.subcategory_id ==3){
-        if (tempDate.getMonth() === month) {
+        if (tempDate.getMonth()+1 === month) {
           this.itemByCategoryList[3] += + element.amount;
-        }else if (tempDate.getMonth() === (month-1)){
+        }else if (tempDate.getMonth()+1 === (month-1)){
           this.itemByCategoryLastMonthList[3] += +element.amount;
-        }else if (tempDate.getMonth() === (month-2)){
+        }else if (tempDate.getMonth()+1 === (month-2)){
           this.itemByCategoryTwoMonthsAgoList[3] +=+ element.amount;
         }
       }
@@ -491,7 +491,7 @@ export class IncomeComponent implements OnInit {
 
   plotCompareIncome(month: number){
     var trace1 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[1], this.itemByCategoryLastMonthList[1], this.itemByCategoryList[1]],
       type: 'bar',
       name: 'redovna',
@@ -502,7 +502,7 @@ export class IncomeComponent implements OnInit {
     };
   
     var trace2 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[2], this.itemByCategoryLastMonthList[2], this.itemByCategoryList[2]],
       type: 'bar',
       name: 'povremena',
@@ -512,7 +512,7 @@ export class IncomeComponent implements OnInit {
     };
   
     var trace3 = {
-      x: [month-1 + 'mj', month + 'mj', month+1 + 'mj'],
+      x: [month-2 + 'mj', month-1 + 'mj', month + 'mj'],
       y: [this.itemByCategoryTwoMonthsAgoList[3], this.itemByCategoryLastMonthList[3], this.itemByCategoryList[3]],
       type: 'bar',
       name: 'ostalo',
@@ -540,6 +540,9 @@ export class IncomeComponent implements OnInit {
       barmode: 'group'
     };
     
+    console.log("Odabran je mjesec");
+    console.log(this.monthSelected);
+    console.log(month);
     Plotly.newPlot('myDiv', data,layout);
   }
 

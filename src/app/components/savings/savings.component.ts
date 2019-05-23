@@ -39,13 +39,11 @@ export class SavingsComponent implements OnInit {
     this.getSavings();
     this.getUsers();
     this.id = this.auth.getUserID();
-    console.log(this.creator);
-    console.log(this.docreator);
   }
     
 
   getSavings() {
-    console.log(this.savingsServce);
+    console.log("dohvacam sve")
     this.savingsServce.getSavings()
                       .subscribe( savings => {
                           this.savings=savings;
@@ -69,20 +67,16 @@ export class SavingsComponent implements OnInit {
     this.savingsExist=true;
     this.savings.forEach(s => 
       this.visibleInput[s.id]=false);
-    console.log(this.visibleInput);
-    console.log(this.savings);
   }
 
   insertUsers(users : UserView[]){
     this.users=users;
-    console.log(this.users)
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddSavingModalComponent, {
       width: '500px',
     });
-    console.log("Ušao")
   }
 
   onClick(id : number) :void {
@@ -90,13 +84,13 @@ export class SavingsComponent implements OnInit {
   }
   
   addToSavings(savingsId: number): void{
-    console.log(this.form.add);
     this.updateSavingInfo = new updateSaving(
       savingsId, 
       this.form.add
       );
-    console.log(this.updateSavingInfo)
-    this.savingsServce.updateSavings(this.updateSavingInfo).subscribe();
+    this.savingsServce.updateSavings(this.updateSavingInfo).subscribe(
+      response => this.getSavings()
+    );
     this.visibleInput[savingsId] = false;
   }
 }

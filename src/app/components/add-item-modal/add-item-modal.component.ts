@@ -45,13 +45,11 @@ export class AddItemModalComponent implements OnInit {
   }
 
   getSubcategory() {
-    console.log("pozvan income")
     this.subcategoryService.getSubcategoriesIncome()
         .subscribe(subcategoryIncome => {
             this.subcategoryIncome = subcategoryIncome;
             this.insertSubcategoryIncome(subcategoryIncome);
         });
-    console.log("pozvan expense")
 
     this.subcategoryService.getSubcategoriesExpense()
         .subscribe(subcategoryExpense => {
@@ -63,18 +61,15 @@ export class AddItemModalComponent implements OnInit {
 
   insertSubcategoryIncome(subcategory : SubcategoryView[]){
       this.subcategoryIncome = subcategory;
-      console.log(this.subcategoryIncome);
   }
 
   insertSubcategoryExpense(subcategory : SubcategoryView[]){
     this.subcategoryExpense = subcategory;
-    console.log(this.subcategoryExpense);
 }
 
   
 
   onSubmit(){
-    console.log("bok")
     this.dateMoment = moment(this.form.date);
     this.saveDate = this.dateMoment.format('MM/DD/YYYY');
 
@@ -86,19 +81,16 @@ export class AddItemModalComponent implements OnInit {
           this.saveDate,
           this.authService.getUserID()
           );
-      console.log(this.itemInfo);
       this.itemsService.newItem(this.itemInfo).subscribe();
       this.closeDialog();
   }
 
   closeDialog() {
-    window.location.reload();
     this.dialogRef.close();
   }
 
   selectedSub(subItem){
     this.subItem = subItem;
-    console.log(this.subItem);
   }
 
   

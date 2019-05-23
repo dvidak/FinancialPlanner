@@ -34,7 +34,6 @@ export class ItemsComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log("dohvacam");
     this.getItems();
   }
 
@@ -53,8 +52,6 @@ export class ItemsComponent implements OnInit {
       this.itemExist = false;
     }
     this.itemExist=true;
-    console.log(items);
-    console.log(this.itemExist);
     this.calculateCharBar();
   }
 
@@ -62,7 +59,6 @@ export class ItemsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddItemModalComponent, {
       width: '500px',
     });
-    console.log("Ušao")
   }
 
   calculateCharBar(): void {

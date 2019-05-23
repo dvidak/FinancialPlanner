@@ -53,7 +53,6 @@ export class AddSavingModalComponent implements OnInit {
 
   insertSubcategoryExpense(subcategory : SubcategoryView[]){
     this.subcategoryExpense = subcategory;
-    console.log(this.subcategoryExpense);
   }
 
   getUsers(){
@@ -66,22 +65,18 @@ export class AddSavingModalComponent implements OnInit {
 
   insertUsers(users : UserView[]){
     this.users=users;
-    console.log(this.users);
   }
 
   selectedSub(subcatSelected : number){
     this.subcatSelected = subcatSelected;
-    console.log(this.subcatSelected);
   }
 
   selectedUser(userSelected : string){
     this.userSelected = userSelected;
-    console.log(this.userSelected);
   }
 
 
   onSubmit(){
-    console.log("bok")
     this.dateMoment = moment(this.form.date);
     this.saveDate = this.dateMoment.format('MM/DD/YYYY');
 
@@ -92,14 +87,14 @@ export class AddSavingModalComponent implements OnInit {
           this.form.amount,
           this.saveDate,
           this.authService.getUserID(),
-          null
+          this.userSelected,
           );
       this.savingsService.newSavings(this.savingInfo).subscribe();
-      console.log(this.savingInfo);
+      this.closeDialog();
+      window.location.reload();
   }
 
   closeDialog() {
-    window.location.reload();
     this.dialogRef.close();
   }
 

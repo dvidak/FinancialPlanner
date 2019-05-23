@@ -36,7 +36,6 @@ export class SavingsService {
 
     updateSavings(add : updateSaving): Observable<updateSaving>{
         var savingsId = add.saving_id;
-        console.log("doso do servisa");
         return this.http.put<updateSaving>(`http://localhost:1000/api/savings/${savingsId}`,add, httpOptions);
     }
 }

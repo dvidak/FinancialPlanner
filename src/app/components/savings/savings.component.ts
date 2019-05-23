@@ -43,7 +43,6 @@ export class SavingsComponent implements OnInit {
     
 
   getSavings() {
-    console.log("dohvacam sve")
     this.savingsServce.getSavings()
                       .subscribe( savings => {
                           this.savings=savings;
@@ -76,6 +75,10 @@ export class SavingsComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddSavingModalComponent, {
       width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getSavings();
     });
   }
 

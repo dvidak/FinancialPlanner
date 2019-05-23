@@ -59,6 +59,10 @@ export class ItemsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddItemModalComponent, {
       width: '500px',
     });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getItems();
+    });
   }
 
   calculateCharBar(): void {

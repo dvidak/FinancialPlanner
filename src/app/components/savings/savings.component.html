@@ -18,7 +18,19 @@
       <div class="body">
       <p>  Štedim za :{{saving.description}}</p>
       <p>  Cilj mi je :{{saving.amount_init}} kn </p>
-      <p>  Trenutno imam : {{saving.amount}} kn  <i class="material-icons" > edit </i> </p> 
+      <p [hidden]="visibleInput[saving.id]">  Trenutno imam : {{saving.amount}} kn 
+          <button (click)="onClick(saving.id)"><i class="material-icons" > edit </i></button>          
+      </p>
+      <p [hidden]="!visibleInput[saving.id]">
+          <mat-form-field class="inputNew">
+              <input matInput placeholder="Novi iznos koji dodajem" 
+              name="add" 
+              [(ngModel)]="form.add" 
+              pattern="^(\d*\.)?\d+$"
+              #name="ngModel" required>
+          </mat-form-field>
+          <button (click)="addToSavings(saving.id)"><i class="material-icons" > add </i></button>          
+      </p> 
       <p>  Fali mi još : {{saving.amount_init - saving.amount}} kn </p>
       <p>  Početak štednje {{saving.date}}</p>
       <p *ngIf="saving.created_with === null">  Štedim samostalno </p>

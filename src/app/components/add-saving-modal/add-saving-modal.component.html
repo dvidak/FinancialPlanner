@@ -1,7 +1,7 @@
 <div class="newItem">
     <h4>Dodaj ... </h4>
     <br>
-      <form  (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+      <form  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
           <mat-form-field>
               <mat-select placeholder="Štedim za ..." 
                           (ngModelChange)="selectedSub($event)"  required name="selected" 
@@ -28,17 +28,19 @@
 
 
       <mat-form-field>
-          <input matInput placeholder="Konačni iznos" 
+          <input matInput placeholder="Konačni iznos u kunama" 
           name="amount" 
-          [(ngModel)]="form.amount" 
+          [(ngModel)]="form.amount"
+          pattern="^(\d*\.)?\d+$"
           #name="ngModel" required>
       <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Iznos je obavezan</mat-error>
       </mat-form-field>
       
       <mat-form-field>
-          <input matInput placeholder="Početni iznos" 
-          name="amount" 
+          <input matInput placeholder="Početni iznos u kunama" 
+          name="amount_init" 
           [(ngModel)]="form.amount_init" 
+          pattern="^(\d*\.)?\d+$"
           #name="ngModel" required>
       <mat-error *ngIf="f.submitted && name.invalid && name.errors.required">Iznos je obavezan</mat-error>
       </mat-form-field>   
@@ -56,7 +58,7 @@
         
     <div class="footer">
         <button mat-raised-button color="primary" (click)="closeDialog()">Odustani</button>
-        <button mat-raised-button color="primary"> Dodaj novi </button>
+        <button mat-raised-button color="primary" [disabled]="f.form.invalid"> Dodaj novi </button>
     </div>
 
     </form>

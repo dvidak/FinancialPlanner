@@ -7,6 +7,7 @@ import {MatDialog } from "@angular/material";
 import { AddSavingModalComponent } from "../add-saving-modal/add-saving-modal.component";
 import { UserView } from 'src/app/models/userView';
 import * as moment from 'moment';
+import { updateSaving } from 'src/app/models/updateSaving';
 
 
 
@@ -16,7 +17,8 @@ import * as moment from 'moment';
   styleUrls: ['./savings.component.css']
 })
 export class SavingsComponent implements OnInit {
-
+  form: any = {};
+  visibleInput : boolean [] = [];
   panelOpenState = false;
   id : string;
   savings: SavingsView [];
@@ -25,6 +27,8 @@ export class SavingsComponent implements OnInit {
   creator : boolean =false ;
   docreator: boolean = false;
   users: UserView [] = [];
+  updateSavingInfo: updateSaving;
+  
 
   constructor(private savingsServce: SavingsService,
               private auth : AuthService,
@@ -63,6 +67,9 @@ export class SavingsComponent implements OnInit {
       this.savingsExist = false;
     }
     this.savingsExist=true;
+    this.savings.forEach(s => 
+      this.visibleInput[s.id]=false);
+    console.log(this.visibleInput);
     console.log(this.savings);
   }
 
@@ -76,5 +83,20 @@ export class SavingsComponent implements OnInit {
       width: '500px',
     });
     console.log("Ušao")
+  }
+
+  onClick(id : number) :void {
+    this.visibleInput[id] = true;
+  }
+  
+  addToSavings(savingsId: number): void{
+    console.log(this.form.add);
+    this.updateSavingInfo = new updateSaving(
+      savingsId, 
+      this.form.add
+      );
+    console.log(this.updateSavingInfo)
+    this.savingsServce.updateSavings(this.updateSavingInfo).subscribe();
+    this.visibleInput[savingsId] = false;
   }
 }

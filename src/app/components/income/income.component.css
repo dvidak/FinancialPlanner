@@ -9,10 +9,16 @@
     width: 70%;
     margin-left: 15%;
   }
- 
- 
-  .card {
-    background-color: white;
-    padding: 20px;
+  
+  .example-month-picker .mat-calendar-period-button {
+    pointer-events: none;
   }
+  
+  .example-month-picker .mat-calendar-arrow {
+    display: none;
+  }
+  
+ 
+  
+
   

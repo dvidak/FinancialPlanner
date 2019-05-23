@@ -1,27 +1,81 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../auth/authentication.service";
 import { Router } from "@angular/router";
+import {FormControl} from '@angular/forms';
 import {ItemsService} from "../../services/item.service";
 import {ItemView} from "../../models/itemView";
 import * as Plotly from "plotly.js/dist/plotly-basic.js";
+import * as _moment from 'moment';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {Moment} from 'moment';
+import {MatDatepicker} from '@angular/material/datepicker';
 
+const moment = _moment;
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'MM/YYYY',
+  },
+  display: {
+    dateInput: 'MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-income',
   templateUrl: './income.component.html',
-  styleUrls: ['./income.component.css']
+  styleUrls: ['./income.component.css'],
+  providers: [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ],
 })
+
+
 export class IncomeComponent implements OnInit {
    Plotly: any;
+   hideOther: boolean;
+   hideIncome: boolean;
+   hideCurrentIncome : boolean;
+   hideCurrentExpense: boolean;
    date : Date = new Date();
    items: ItemView[];
+   itemsForPicked: ItemView[];
    itemExist: boolean;
    itemIncome: ItemView[];
    itemExpense: ItemView[];
-   itemByCategoryList: number[] = [0,0,0,0,0,0,0,0,0,0,0];
-   itemByCategoryLastMonthList: number[] = [0,0,0,0,0,0,0,0,0,0,0];
-   itemByCategoryTwoMonthsAgoList:  number[] = [0,0,0,0,0,0,0,0,0,0,0];
+   itemByCategoryList: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
+   itemByCategoryLastMonthList: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
+   itemByCategoryTwoMonthsAgoList:  number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
+   datePicked = new FormControl(moment());
+   monthSelected: number = null;
+   yearSelected: number = null;
+
+   chosenYearHandler(normalizedYear: Moment) {
+     const ctrlValue = this.datePicked.value;
+     ctrlValue.year(normalizedYear.year());
+     this.datePicked.setValue(ctrlValue);
+   }
+ 
+   chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
+     const ctrlValue = this.datePicked.value;
+     ctrlValue.month(normalizedMonth.month());
+     this.datePicked.setValue(ctrlValue);
+     console.log(this.datePicked)
+     this.yearSelected = moment(this.datePicked.value,"DD/MM/YYYY").year();
+     this.monthSelected = moment(this.datePicked.value,"DD/MM/YYYY").month()+1;
+     console.log("odbaran datum")
+     console.log(this.yearSelected);
+     console.log(this.monthSelected);
+     datepicker.close();
+     this.getItemsByDate();
+   }
+   
+   
 
   constructor(private auth : AuthService,
               private itemsService: ItemsService,
@@ -29,15 +83,26 @@ export class IncomeComponent implements OnInit {
 
   ngOnInit() {
     this.getItems();
-
   }
 
   getItems() {
-    console.log(this.itemsService);
     this.itemsService.getItems()
                       .subscribe( items => {
                           this.items=items;
                           this.insertItems(this.items)
+                      },error => this.itemExist=false);
+  }
+
+  getItemsByDate(){
+    this.restart();
+    var year = this.yearSelected;
+    var month = this.monthSelected;
+    console.log(year);
+    console.log(month);
+    this.itemsService.getItemsByDate(month ,year)
+                      .subscribe( items => {
+                          this.itemsForPicked=items;
+                          this.insertItemsPickedDate(this.items)
                       },error => this.itemExist=false);
   }
 
@@ -47,18 +112,35 @@ export class IncomeComponent implements OnInit {
       this.itemExist = false;
     }
     this.itemExist=true;
-    console.log(items);
-    console.log(this.itemExist);
+    console.log("U items cuvam sve iteme");
+    console.log(this.items);
+    this.calculateCategoryExpenseChartBar();
+  }
+
+  insertItemsPickedDate(items : ItemView[]){
+    this.itemsForPicked=items;
+    if(items === null){
+      this.itemExist = false;
+    }
+    this.itemExist=true;
+    console.log("itemsi koje smo unjeli za taj datum");
+    console.log(this.itemsForPicked);
     this.calculateCategoryExpenseChartBar();
   }
 
   calculateCategoryExpenseChartBar(){
-    var month = this.date.getMonth();
-    this.itemByCategoryList = [0,0,0,0,0,0,0,0,0,0,0];
+    this.hideOther = false;
+    this.hideIncome = true;
+    this.hideCurrentExpense = false;
+    if(this.monthSelected === null){
+      var month = this.date.getMonth();
+    }else{
+       var month = this.monthSelected;
+    }
+    this.restart();
     this.items.forEach(element => {
       var tempDate = new Date (element.boughtAt);
-      if(tempDate.getMonth() == month){
-        this.sumExpense +=+element.amount;
+      if(tempDate.getMonth()+1 == month){
         if(element.subcategory_id == 4){
           this.itemByCategoryList[4] +=+element.amount;
         }else if(element.subcategory_id == 5){
@@ -79,34 +161,13 @@ export class IncomeComponent implements OnInit {
       }
     })
     this.plotCategoryExpense();  
-    }
-
-  plotPieCategoryExpense(){
-    var data = [{
-      x: ['režije','prehrana','odijevanje','prijevoz','higijena','zdravlje','dom','slobodno vrijeme'],
-      y: [this.calculatePercent[0],this.calculatePercent[1],this.calculatePercent[2],this.calculatePercent[3],this.calculatePercent[4],this.calculatePercent[5],this.calculatePercent[6],this.calculatePercent[7]],
-      type: 'pie',
-      marker: {
-        color: '#3a2735'
-      }
-    }];
-
-    var layout = {
-      title: {
-        text:'Tekući mjesec potrošnja',
-        font: {
-          size: 24,
-          color:'#3a2735',
-        },
-      },  
-    };
-    
-    Plotly.newPlot('myDiv', data, layout);
-
   }
+
+
   
 
   plotCategoryExpense(){
+    console.log(this.itemByCategoryList)
     var data = [{
       x: ['režije','prehrana','odijevanje','prijevoz','higijena','zdravlje','dom','slobodno vrijeme'],
       y: [this.itemByCategoryList[4], this.itemByCategoryList[5],this.itemByCategoryList[6],this.itemByCategoryList[7],this.itemByCategoryList[8],this.itemByCategoryList[9],this.itemByCategoryList[10],this.itemByCategoryList[11]],
@@ -118,24 +179,39 @@ export class IncomeComponent implements OnInit {
 
     var layout = {
       title: {
-        text:'Tekući mjesec potrošnja',
+        text:'Odabrani mjesec potrošnja',
         font: {
           size: 24,
           color:'#3a2735',
         },
-      },  
+      },
+      xaxis: {
+        title: 'Potrošnja po kategoriji'
+      },
+      yaxis: {
+        title: 'Iznos u kunama'
+      },
+        
     };
     
-    Plotly.newPlot('myDiv', data, layout);
+    Plotly.newPlot('myDivExpense', data, layout);
   }
 
 
   calculateCategoryIncomeChartBar(){
+
+    this.hideOther = false;
+    this.hideIncome = false;
+    this.hideCurrentIncome = false;
     this.restart();
-    var month = this.date.getMonth();
+    if(this.monthSelected === null){
+      var month = this.date.getMonth();
+    }else{
+       var month = this.monthSelected;
+    }
     this.items.forEach(element => {
       var tempDate = new Date (element.boughtAt);
-      if(tempDate.getMonth() == month){
+      if(tempDate.getMonth()+1 == month){
         if(element.subcategory_id == 1){
           this.itemByCategoryList[1] +=+element.amount;
        }else if(element.subcategory_id == 2){
@@ -145,6 +221,7 @@ export class IncomeComponent implements OnInit {
       }
     }
   });
+  
   this.plotCategoryIncome()
   }
 
@@ -160,20 +237,33 @@ export class IncomeComponent implements OnInit {
 
     var layout = {
       title: {
-        text:'Tekući mjesec primanja',
+        text:'Odabrani mjesec primanja',
         font: {
           size: 24,
           color:'#3a2735',
         },
-      },  
+      },
+      xaxis: {
+        title: 'Potrošnja po kategoriji'
+      },
+      yaxis: {
+        title: 'Iznos u kunama'
+      },   
     };
     
-    Plotly.newPlot('myDiv', data, layout);
+    Plotly.newPlot('myDivIncome', data, layout);
   }
 
+
+
   calculateCompareExpense(){
+    this.hideOther = true;
     this.restart();
-    var month = this.date.getMonth();
+    if(this.monthSelected === null){
+      var month = this.date.getMonth();
+    }else{
+       var month = this.monthSelected;
+    }
     this.items.forEach(element => {
       var tempDate = new Date (element.boughtAt);
       if(element.subcategory_id ==4){
@@ -242,6 +332,7 @@ export class IncomeComponent implements OnInit {
         }
       }
   });
+
 
   this.plotCompareExpense(month);
  
@@ -339,20 +430,33 @@ export class IncomeComponent implements OnInit {
           color:'#3a2735',
         },
       },
+      xaxis: {
+        title: 'Potrošnja po mjesecima'
+      },
+      yaxis: {
+        title: 'Iznos u kunama'
+      }, 
       barmode: 'group'};
     
     Plotly.newPlot('myDiv', data,layout);
   }
 
   restart(){
+    this.itemExpense = [];
+    this.itemIncome =[];
     this.itemByCategoryList = [0,0,0,0,0,0,0,0,0,0,0];
     this.itemByCategoryLastMonthList = [0,0,0,0,0,0,0,0,0,0,0];
-    this.itemByCategoryTwoMonthsAgoList = [0,0,0,0,0,0,0,0,0,0,0];
+    this.itemByCategoryTwoMonthsAgoList = [0,0,0,0,0,0,0,0,0,0,0];   
   }
 
   calculateIncomeCompare(){
+    this.hideOther = true;
     this.restart();
-    var month = this.date.getMonth();
+     if(this.monthSelected === null){
+      var month = this.date.getMonth();
+    }else{
+       var month = this.monthSelected;
+    }
     this.items.forEach(element => {
       var tempDate = new Date (element.boughtAt);
       if(element.subcategory_id ==1){
@@ -427,8 +531,75 @@ export class IncomeComponent implements OnInit {
           color:'#3a2735',
         },
       },
-      barmode: 'group'};
+      xaxis: {
+        title: 'Primanja po mjesecima'
+      },
+      yaxis: {
+        title: 'Iznos u kunama'
+      }, 
+      barmode: 'group'
+    };
     
     Plotly.newPlot('myDiv', data,layout);
+  }
+
+
+  calculateIncomeCurrentMonthPie(){
+    this.hideCurrentIncome = true;
+    var sum = this.itemByCategoryList[1] + this.itemByCategoryList[2] + this.itemByCategoryList[3];
+    var a = Math.ceil(this.itemByCategoryList[1]/sum * 100);
+    var b = Math.ceil(this.itemByCategoryList[2]/sum * 100);
+    var c = Math.ceil(this.itemByCategoryList[3]/sum * 100);
+
+    var data = [{
+      values: [a, b, c],
+      labels: ['redovna', 'povremena', 'ostalo'],
+      type: 'pie'
+    }];
+
+    var layout = {
+      title: {
+        text:'Tekući mjesec primanja',
+        font: {
+          size: 24,
+          color:'#3a2735',
+        },
+      },        
+    };
+    
+    Plotly.newPlot('myDivIncomePie', data,layout);
+  }
+
+  calculateExpenseCurrentMonthPie(){
+    this.hideCurrentExpense = true;
+    console.log(this.itemByCategoryList);
+    console.log(this.itemByCategoryList[4]);
+    var sum = this.itemByCategoryList[4] + this.itemByCategoryList[5] + this.itemByCategoryList[6] + this.itemByCategoryList[7] + this.itemByCategoryList[8] + this.itemByCategoryList[9] + this.itemByCategoryList[10];
+    var a = Math.ceil(this.itemByCategoryList[4]/sum * 100); 
+    var b = Math.ceil(this.itemByCategoryList[5]/sum * 100);
+    var c = Math.ceil(this.itemByCategoryList[6]/sum * 100);
+    var d = Math.ceil(this.itemByCategoryList[7]/sum * 100);
+    var e = Math.ceil(this.itemByCategoryList[8]/sum * 100);
+    var f = Math.ceil(this.itemByCategoryList[9]/sum * 100);
+    var g = Math.ceil(this.itemByCategoryList[10]/sum * 100);
+    var h = Math.ceil(this.itemByCategoryList[11]/sum * 100);
+
+    var data = [{
+      values: [a,b,c,d,e,f,g,h],
+      labels: ['režije','prehrana','odijevanje','prijevoz','higijena','zdravlje','dom','slobodno vrijeme'],
+      type: 'pie'
+    }];
+
+    var layout = {
+      title: {
+        text:'Tekući mjesec potrošnja',
+        font: {
+          size: 24,
+          color:'#3a2735',
+        },
+      },        
+    };
+    
+    Plotly.newPlot('myDivExpensePie', data,layout);
   }
 }

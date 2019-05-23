@@ -41,7 +41,6 @@ export class ItemsComponent implements OnInit {
 
   
   getItems() {
-    console.log(this.itemsService);
     this.itemsService.getItems()
                       .subscribe( items => {
                           this.items=items;

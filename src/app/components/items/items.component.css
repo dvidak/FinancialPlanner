@@ -13,8 +13,10 @@
 }
 
 .leftcolumn {
+  margin-top: 5px;
+  margin-left: 1%;
   float: left;
-  width: 70%;
+  width: 65%;
   border: 4px solid #3b393d;
 }
 

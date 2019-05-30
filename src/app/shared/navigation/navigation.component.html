@@ -1,7 +1,7 @@
-<div class="navigation">
-  <a  *ngIf='isVisible()' routerLink="/evidencija">Evidencija</a>
-  <a  *ngIf='isVisible()' routerLink="/pregled">Troškovi</a>
-  <a *ngIf='isVisible()' routerLink="/štednja">Štednja</a>
-  <i *ngIf='isVisible()' (click)="openProfile()"> {{ username }} </i>
-
-</div>
+<ul>
+    <li><a *ngIf='isVisible()' routerLink="/profil">Profil</a></li>
+    <li><a *ngIf='isVisible()' routerLink="/evidencija">Evidencija</a></li>
+    <li><a *ngIf='isVisible()' routerLink="/pregled">Troškovi</a></li>
+    <li><a *ngIf='isVisible()' routerLink="/štednja">Štednja</a></li>
+    <li><i *ngIf='isVisible()' (click)="openProfile()"> {{ username }}</i></li>
+  </ul>

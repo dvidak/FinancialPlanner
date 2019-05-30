@@ -3,7 +3,7 @@
     width: 60%;
     border: 2px solid;
     border-radius: 50px;
-    background-color: lightgray;
+    background-color: #e8dee5;
 }
 
 .material-icons{
@@ -13,7 +13,8 @@
     border: 3px solid;
     border-radius: 50px;
     font-size: 150px;
-    background:#878386;
+    color:#e8dee5;
+    background:#3a2735;
 }
 
 .input{

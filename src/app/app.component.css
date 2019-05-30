@@ -3,9 +3,8 @@
   padding: 0;
 }
 
-
-.jumbotron {
-    padding: 30px;
+.top {
+    padding: 20px;
     text-align: center;
     background:#3a2735;
     color: lightgrey
@@ -14,6 +13,3 @@
 .material-icons signOutButton{
   margin-right: 2px;
 }
-
-
-

@@ -3,12 +3,27 @@
     padding: 0;
   }
 
-  .navigation{
-    padding: 10px;
-    background-color: lightgray;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #3a2735;
   }
-
- .navigation a {
-   margin-left: 5px;
-   color: #3a2735;
- }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: lightgray;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #e8dee5;
+    color: #3a2735;
+  }

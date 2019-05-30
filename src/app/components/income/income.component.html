@@ -1,29 +1,32 @@
 <div class="container">
   <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9" [hidden]="!itemsByDateExist">
       <div class="ovo" [hidden]="hideOther">
       <div class="cardCurrentIncome"  [hidden]="hideIncome">
-        <div id="myDivIncome" [hidden]="hideCurrentIncome">
-          <button class="buttonPie" (click)="calculateIncomeCurrentMonthPie()"><i class="material-icons" matSuffix>autorenew</i></button>          
-        </div>
         <div id="myDivIncomePie" [hidden]="!hideCurrentIncome">
-            <button class="buttonPie" (click)="calculateCategoryIncomeChartBar()"><i class="material-icons" matSuffix>autorenew</i></button>
+            <button class="btn btn-light btn-block" (click)="calculateCategoryIncomeChartBar()"><i class="material-icons" matSuffix>autorenew</i></button>
         </div>
+        <div id="myDivIncome" [hidden]="hideCurrentIncome">
+            <button class="btn btn-light btn-block " (click)="calculateIncomeCurrentMonthPie()"><i class="material-icons" matSuffix>autorenew</i></button>          
+          </div>
       </div>
       <div class="cardCurrentExpense"  [hidden]="!hideIncome">
-          <div id="myDivExpense" [hidden]="hideCurrentExpense">
-            <button class="buttonPie" (click)="calculateExpenseCurrentMonthPie()"><i class="material-icons" matSuffix>autorenew</i></button>          
-          </div>
           <div id="myDivExpensePie" [hidden]="!hideCurrentExpense">
-            <button class="buttonPie" (click)="calculateCategoryExpenseChartBar()"><i class="material-icons" matSuffix>autorenew</i></button>          
+            <button class="btn btn-light btn-block" (click)="calculateCategoryExpenseChartBar()"><i class="material-icons" matSuffix>autorenew</i></button>          
           </div>
+          <div id="myDivExpense" [hidden]="hideCurrentExpense">
+              <button class="btn btn-light btn-block" (click)="calculateExpenseCurrentMonthPie()"><i class="material-icons" matSuffix>autorenew</i></button>          
+            </div>
         </div>
       </div>
       <div class="ovo2" [hidden]="!hideOther">
         <div id="myDiv"></div>
       </div>
     </div>
-  <div class="col-md-3">
+    <div class="col-md-9" [hidden]="itemsByDateExist">
+      <p class="porukica"> Za odabrani mjesec nema podataka za prikaz </p>
+    </div>
+  <div class="col-md-3" style="margin-bottom: 30px">
     <div class="row">
         <div class="myCard">
         <h5> Grafički prikaz ovisno o </h5>
@@ -38,10 +41,10 @@
             </mat-datepicker>
           </mat-form-field>
           <div class="btn-group-vertical btn-group-lg mx-2">
-              <button class="btn btn-secondary" (click)="calculateCategoryIncomeChartBar()"> Primanja </button>
-              <button class="btn btn-secondary" (click)="calculateCategoryExpenseChartBar()"> Potrošnja </button>          
-              <button class="btn btn-secondary" (click)="calculateCompareExpense()">Usporedba potrošnje</button>          
-              <button class="btn btn-secondary" (click)="calculateIncomeCompare()">Usporedba primanja</button>    
+              <button class="btn btn-secondary" (click)="calculateCategoryExpenseChartBar()" [disabled]="buttons[0]"> Potrošnja </button>
+              <button class="btn btn-secondary" (click)="calculateCategoryIncomeChartBar()" [disabled]="buttons[1]"> Primanja </button>          
+              <button class="btn btn-secondary" (click)="calculateCompareExpense()" [disabled]="buttons[2]">Usporedba potrošnje</button>          
+              <button class="btn btn-secondary" (click)="calculateIncomeCompare()" [disabled]="buttons[3]">Usporedba primanja</button>    
           </div>
         </div>
     </div>

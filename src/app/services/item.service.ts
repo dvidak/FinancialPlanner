@@ -30,6 +30,12 @@ export class ItemsService {
         return this.http.get<ItemView[]>(`http://localhost:1000/api/items/${this.userId}`);
     }
 
+
+    getItemsByDate(year:number, month : number): Observable<ItemView[]> {
+        this.userId = this.auth.getUserID();
+        return this.http.get<ItemView[]>(`http://localhost:1000/api/itemsByDate/${this.userId}/${year}/${month}`);
+    }
+
    
     newItem(newItem : newItem): Observable<newItem[]> {
         this.userId = this.auth.getUserID();

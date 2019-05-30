@@ -2,18 +2,24 @@
     <h4 class="naslov"> Dodaj </h4>
     <br>
       <form  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-          <mat-form-field>
-              <mat-select placeholder="Štedim za ..." 
-                          (ngModelChange)="selectedSub($event)"  required name="selected" 
-                          [(ngModel)]="form.selected" #selected="ngModel">
-                  <mat-option *ngFor="let sub of subcategoryExpense" 
+            <mat-form-field>
+                    <mat-label>Štedim za</mat-label>
+                    <mat-select  (ngModelChange)="selectedSub($event)"
+                                [(ngModel)]="form.selected"
+                                name="user" >
+                      <mat-option *ngFor="let sub of subcategoryExpense" 
                               [value]="sub.id">{{sub.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+                    </mat-select>
+            </mat-form-field>
+        
+                        
         <mat-form-field>
-            <mat-select placeholder="Štedim sa ..." 
-                        (ngModelChange)="selectedUser($event)"  required name="selectedUser" 
-                        [(ngModel)]="form.selectedUsers" #selected="ngModel">
+            <mat-select placeholder="Štedim sam" 
+                        (ngModelChange)="selectedUser($event)" 
+                        [(ngModel)]="form.selectedUsers" 
+                        #selected="ngModel"
+                        name="something">
+                <mat-option [value]="null">Štedim sam</mat-option>
                 <mat-option *ngFor="let user of users" 
                             [value]="user.id">{{user.username}}</mat-option>
         </mat-select>

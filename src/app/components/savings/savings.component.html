@@ -1,18 +1,21 @@
 <div class="container">
-<div class="row">
-<div class="right">
-<h4 class="title"> Lista svih mojih štednji </h4>
-<mat-accordion *ngFor="let saving of savings ; let i = index">
+<mat-tab-group>
+
+<mat-tab label="Moje štednje"> 
+<mat-accordion class="savings" *ngFor="let saving of savings ; let i = index">
     <mat-expansion-panel  *ngIf="saving.created_by === id ">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Moja štednja
+          Moja štednja 
         </mat-panel-title> 
+        <mat-panel-description>
+            {{saving.date}}
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="body">
-      <p>  Štedim za :{{saving.description}}</p>
-      <p>  Cilj mi je :{{saving.amount}} kn </p>
-      <p [hidden]="visibleInput[saving.id]">  Trenutno imam : {{saving.amount_init}} kn 
+      <p> <b> Štedim za : </b>{{saving.description}}</p>
+      <p>  <b> Cilj mi je: </b>{{saving.amount}} kn </p>
+      <p [hidden]="visibleInput[saving.id]"> <b> Trenutno imam : </b> {{saving.amount_init}} kn 
           <button type="button" class="btn-secondary" (click)="onClick(saving.id)"><i class="small material-icons" > edit </i></button>          
       </p>
       <p [hidden]="!visibleInput[saving.id]">
@@ -25,36 +28,50 @@
           </mat-form-field>
           <button type="button" class="btn-secondary"(click)="addToSavings(saving.id)"><i class="small material-icons" > add </i></button>          
       </p> 
-      <p>  Fali nam još : {{saving.amount - saving.amount_init }} kn </p>
-      <p>  Početak štednje {{saving.date}}</p>
-      <p *ngIf="saving.created_with === null">  Štedim samostalno </p>
-      <p *ngIf="saving.created_with !== null">  Štedim s {{ saving.CoOwner.username }} </p>
-
+      <p> <b> Fali nam još : </b> {{saving.amount - saving.amount_init }} kn </p>
+      <p> <b> Početak štednje : </b> {{saving.date}}</p>
+      <p *ngIf="saving.created_with === null"> <b> Štedim : </b> samostalno </p>
+      <p *ngIf="saving.created_with !== null"> <b> Štedim s : </b> {{ saving.CoOwner.username }} </p>
       </div>  
      </mat-expansion-panel>
 </mat-accordion>
-</div>
-<div class="left">
-    <h4 class="title"> Lista štednji u kojima sudjelujem </h4>
+</mat-tab>
+<mat-tab label="Zajedničke štednje"> 
     <mat-accordion *ngFor="let saving of savings ; let i = index">
         <mat-expansion-panel *ngIf="saving.created_with === id">
             <mat-expansion-panel-header>
               <mat-panel-title>
                  Štednja u kojoj sudjeluem
               </mat-panel-title>
+              <mat-panel-description>
+                  {{saving.date}}
+              </mat-panel-description>
             </mat-expansion-panel-header>
-            <p>  Štedimo za : {{saving.description}}</p>
-            <p>  Cilj nam je :{{saving.amount}} kn </p>
-            <p>  Trenutno imamo : {{saving.amount_init}} kn <i class="material-icons" > edit </i> </p>
-            <p>  Fali nam još : {{saving.amount - saving.amount_init }} kn </p>
-            <p>  Kraj štednje {{saving.date}}</p>
-            <p>  Štedim s : {{ saving.created_by}}</p>
+            <p> <b> Štedimo za : </b> {{saving.description}}</p>
+            <p> <b> Cilj nam je : </b>{{saving.amount}} kn </p>
+            <p [hidden]="visibleInput[saving.id]"> <b> Trenutno imam : </b> {{saving.amount_init}} kn 
+                <button type="button" class="btn-secondary" (click)="onClick(saving.id)"><i class="small material-icons" > edit </i></button>          
+            </p>
+            <p [hidden]="!visibleInput[saving.id]">
+                <mat-form-field class="inputNew">
+                    <input matInput placeholder="Novi iznos koji dodajem" 
+                    name="add" 
+                    [(ngModel)]="form.add" 
+                    pattern="^(\d*\.)?\d+$"
+                    #name="ngModel" required>
+                </mat-form-field>
+                <button type="button" class="btn-secondary"(click)="addToSavings(saving.id)"><i class="small material-icons" > add </i></button>          
+            </p> 
+            <p> <b> Fali nam još : </b> {{saving.amount - saving.amount_init }} kn </p>
+            <p> <b> Početak štednje : </b> {{saving.date}}</p>
           </mat-expansion-panel>
       </mat-accordion>
-</div>
-</div>
-<div class="footer">
-    <button class="btn btn-secondary" 
-    (click)="openDialog()">Dodaj novu štednju</button>
-</div>
+</mat-tab>
+<mat-tab disabled>
+        <ng-template mat-tab-label>
+            <button mat-icon-button 
+                (click)="openDialog()">Dodaj novu štednju</button>
+        </ng-template>  
+</mat-tab>
+</mat-tab-group>
 </div>

@@ -45,8 +45,10 @@ export class IncomeComponent implements OnInit {
    hideCurrentExpense: boolean;
    date : Date = new Date();
    items: ItemView[];
+   itemsByDate: ItemView[];
    itemsForPicked: ItemView[];
    itemExist: boolean;
+   itemsByDateExist: boolean = true;
    itemIncome: ItemView[];
    itemExpense: ItemView[];
    itemByCategoryList: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -55,6 +57,7 @@ export class IncomeComponent implements OnInit {
    datePicked = new FormControl(moment());
    monthSelected: number = null;
    yearSelected: number = null;
+   buttons: boolean[] = [false,false,false,false];
 
    chosenYearHandler(normalizedYear: Moment) {
      const ctrlValue = this.datePicked.value;
@@ -70,6 +73,7 @@ export class IncomeComponent implements OnInit {
      this.yearSelected = moment(this.datePicked.value,"DD/MM/YYYY").year();
      this.monthSelected = moment(this.datePicked.value,"DD/MM/YYYY").month()+1;
      datepicker.close();
+     this.getItemsByDate();
      this.calculateCategoryExpenseChartBar();
    }
    
@@ -91,15 +95,35 @@ export class IncomeComponent implements OnInit {
                       },error => this.itemExist=false);
   }
 
+
+  getItemsByDate() {
+    this.itemsService.getItemsByDate(this.yearSelected,this.monthSelected)
+                      .subscribe( itemsByDate => {
+                          this.itemsByDate=itemsByDate;
+                          this.insertItemsByDate(this.itemsByDate)
+                      },error => this.itemExist=false);
+  }
+
   insertItems(items : ItemView[]){
     this.items=items;
     if(items === null){
       this.itemExist = false;
     }
     this.itemExist=true;
-    console.log("U items cuvam sve iteme");
-    console.log(this.items);
     this.calculateCategoryExpenseChartBar();
+  }
+
+  insertItemsByDate(itemsByDate : ItemView[]){
+    this.itemsByDate=itemsByDate;
+    if(this.itemsByDate.length === 0){
+      this.itemsByDateExist = false;
+    }else{
+      this.itemsByDateExist = true;
+    }
+    console.log("poslje");
+    console.log(this.itemsByDate)
+    console.log("bool");
+    console.log(this.itemsByDateExist)
   }
 
   insertItemsPickedDate(items : ItemView[]){
@@ -146,6 +170,7 @@ export class IncomeComponent implements OnInit {
         this.isExpenseEmpty = true;
       }
     })
+    this.buttons = [true,false,false,false];
     this.plotCategoryExpense();  
   }
 
@@ -208,6 +233,8 @@ export class IncomeComponent implements OnInit {
     }
   });
   
+  this.buttons = [false,true,false,false];
+
   this.plotCategoryIncome()
   }
 
@@ -317,9 +344,12 @@ export class IncomeComponent implements OnInit {
           this.itemByCategoryTwoMonthsAgoList[11] +=+ element.amount;
         }
       }
+
+      this.buttons = [false,false,true,false];
+
   });
 
-
+  
   this.plotCompareExpense(month);
  
   }
@@ -472,6 +502,8 @@ export class IncomeComponent implements OnInit {
       }
     });
 
+    this.buttons = [false,false,false,true];
+
     this.plotCompareIncome(month);
   }
 
@@ -543,6 +575,9 @@ export class IncomeComponent implements OnInit {
     var data = [{
       values: [a, b, c],
       labels: ['redovna', 'povremena', 'ostalo'],
+      marker: {
+        colors: ['#3a2735','#ada3b7','#82397f']
+      },
       type: 'pie'
     }];
 
@@ -576,6 +611,9 @@ export class IncomeComponent implements OnInit {
     var data = [{
       values: [a,b,c,d,e,f,g,h],
       labels: ['režije','prehrana','odijevanje','prijevoz','higijena','zdravlje','dom','slobodno vrijeme'],
+      marker: {
+        colors: ['#3a2735','#ada3b7','#82397f',' #d279d2',' #ff99ff','#e600e6', '#1a001a',' #c653c6']
+      },
       type: 'pie'
     }];
 

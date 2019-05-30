@@ -46,12 +46,14 @@ export class ItemsComponent implements OnInit {
                       },error => this.itemExist=false);
   }
 
+
   insertItems(items : ItemView[]){
     this.items=items;
     if(items === null){
       this.itemExist = false;
     }
     this.itemExist=true;
+    console.log(this.items);
     this.calculateCharBar();
   }
 
@@ -70,7 +72,9 @@ export class ItemsComponent implements OnInit {
     if(this.itemExist){
     this.items.forEach(element => {
         var tempDate = new Date (element.boughtAt);
+        console.log(tempDate)
         if(element.subcategory_id ==1 || element.subcategory_id ==2 || element.subcategory_id ==3){
+          console.log(element.boughtAt)
           if (tempDate.getMonth() === month) {
             this.currentMonthIncome += + element.amount;
           }else if (tempDate.getMonth() === (month-1)){
@@ -112,6 +116,12 @@ export class ItemsComponent implements OnInit {
   var data = [trace1, trace2];
   
   var layout = {
+    title: {
+      text:'Usporedba primanja i troškova',
+      font: {
+        color:'#3a2735',
+      },
+    },
     height: 350,
     width: 350,
     barmode: 'group'};

@@ -72,11 +72,14 @@ export class AddSavingModalComponent implements OnInit {
   }
 
   selectedUser(userSelected : string){
-    this.userSelected = userSelected;
+    if(userSelected != null){
+      this.userSelected = userSelected;
+    }
   }
 
 
   onSubmit(){
+    console.log("Saveee");
     this.dateMoment = moment(this.form.date);
     this.saveDate = this.dateMoment.format('MM/DD/YYYY');
 
@@ -89,9 +92,9 @@ export class AddSavingModalComponent implements OnInit {
           this.authService.getUserID(),
           this.userSelected,
           );
+      console.log(this.savingInfo);
       this.savingsService.newSavings(this.savingInfo).subscribe();
       this.closeDialog();
-      window.location.reload();
   }
 
   closeDialog() {

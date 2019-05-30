@@ -16,6 +16,7 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
 import { LoginComponent } from './components/login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
+
 import { PlotlyModule } from 'angular-plotly.js';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 
@@ -32,6 +33,7 @@ import {
   MatExpansionModule,
   MatCheckboxModule,
   MatButtonModule,
+  MatTabsModule,
   MatDatepickerModule, 
   MatNativeDateModule,
   MatIconModule,
@@ -84,6 +86,7 @@ import { AddSavingModalComponent } from './components/add-saving-modal/add-savin
     MatRadioModule,
     MatDatepickerModule,
     MatDialogModule,
+    MatTabsModule,
     MatNativeDateModule ,
     MatInputModule,
     NgbModule,

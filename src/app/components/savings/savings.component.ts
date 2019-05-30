@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { SavingsService } from 'src/app/services/savings.service';
 import { AuthService } from 'src/app/auth/authentication.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,7 +14,9 @@ import { updateSaving } from 'src/app/models/updateSaving';
 @Component({
   selector: 'app-savings',
   templateUrl: './savings.component.html',
-  styleUrls: ['./savings.component.css']
+  styleUrls: ['./savings.component.css'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class SavingsComponent implements OnInit {
   form: any = {};
@@ -43,6 +45,8 @@ export class SavingsComponent implements OnInit {
     
 
   getSavings() {
+    console.log("okinuo sam getsaving")
+
     this.savingsServce.getSavings()
                       .subscribe( savings => {
                           this.savings=savings;
@@ -87,13 +91,14 @@ export class SavingsComponent implements OnInit {
   }
   
   addToSavings(savingsId: number): void{
+    console.log("okinuo sam saving")
     this.updateSavingInfo = new updateSaving(
       savingsId, 
       this.form.add
       );
-    this.savingsServce.updateSavings(this.updateSavingInfo).subscribe(
-      response => this.getSavings()
-    );
+    this.savingsServce.updateSavings(this.updateSavingInfo).subscribe();
+    //To nije dobro
     this.visibleInput[savingsId] = false;
+    this.getSavings();
   }
 }

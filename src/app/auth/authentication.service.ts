@@ -10,6 +10,8 @@ export const TOKEN_NAME: string = 'token';
 export const USERNAME_KEY = 'AuthUsername';
 export const AUTHORITIES_KEY = 'AuthAuthorities';
 export const USER_ID = 'AuthUserID'
+export const ROLE_ID = 'AuthUserRoleID'
+
 
 
 const httpOptions = {
@@ -35,6 +37,15 @@ export class AuthService {
     setToken(token: string): void {
       localStorage.setItem(TOKEN_NAME, token);
     }
+
+    getRoleId(): string{
+      return localStorage.getItem(ROLE_ID);
+    }
+
+    setRoleId(role: string): void{
+      console.log(role);
+      localStorage.setItem(ROLE_ID, role);
+    } 
 
     attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
         return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);

@@ -3,4 +3,5 @@ export class JwtResponse {
     message: string;
     token: string;
     id: string;
+    role_id:string;
 }

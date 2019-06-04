@@ -48,6 +48,7 @@ import { AddItemModalComponent } from './components/add-item-modal/add-item-moda
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SavingsComponent } from './components/savings/savings.component';
 import { AddSavingModalComponent } from './components/add-saving-modal/add-saving-modal.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 
 
@@ -64,6 +65,7 @@ import { AddSavingModalComponent } from './components/add-saving-modal/add-savin
     UserProfileComponent,
     SavingsComponent,
     AddSavingModalComponent,
+    AdminPageComponent,
   ],
   imports: [
     JwtModule.forRoot({

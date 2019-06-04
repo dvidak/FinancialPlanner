@@ -13,7 +13,8 @@ export class NavigationComponent implements OnInit {
   show: boolean = false;
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private auth: AuthService) { }
 
   ngOnInit() {
   }
@@ -25,4 +26,13 @@ export class NavigationComponent implements OnInit {
         return true;
     }
   }
+
+  isAdmin(){
+    console.log(this.auth.getRoleId);
+      if (this.auth.getRoleId() === '1'){
+          return true;
+      }
+      return false;
+  }
 }
+

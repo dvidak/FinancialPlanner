@@ -31,4 +31,9 @@ export class UserService {
         this.userId = this.auth.getUserID()
         return this.http.get<UserView>(`http://localhost:1000/api/users/${this.userId}`);
     }
+
+    deleteUser(username: string) {
+        return this.http.delete<string>(`http://localhost:1000/api/users/${username}`);
+    }
+
 }

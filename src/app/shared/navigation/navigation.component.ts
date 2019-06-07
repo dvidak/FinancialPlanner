@@ -28,7 +28,6 @@ export class NavigationComponent implements OnInit {
   }
 
   isAdmin(){
-    console.log(this.auth.getRoleId);
       if (this.auth.getRoleId() === '1'){
           return true;
       }

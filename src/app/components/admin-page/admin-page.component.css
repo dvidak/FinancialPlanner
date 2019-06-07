@@ -1,0 +1,21 @@
+.title{
+    margin: 15px;
+    text-align: center;
+}
+
+.container{
+    margin-top: 10px;
+    width:60%;
+}
+
+.mat-accordion .mat-expansion-panel:last-of-type{
+    margin: 5px;
+}
+
+p.porukica{
+    color: #3a2735;
+    margin-left: 150px;
+    align-content: center;
+    font-size: x-large;
+    font-family: cursive;
+  }

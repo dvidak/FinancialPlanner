@@ -44,11 +44,14 @@ import {
 import { RegistrationModalComponent } from './components/registration-modal/registration-modal.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { AuthGuardService } from './auth/auth-guard.service';
+import { RoleGuard } from './auth/role-guard.service';
+
 import { AddItemModalComponent } from './components/add-item-modal/add-item-modal.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SavingsComponent } from './components/savings/savings.component';
 import { AddSavingModalComponent } from './components/add-saving-modal/add-saving-modal.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
@@ -66,6 +69,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     SavingsComponent,
     AddSavingModalComponent,
     AdminPageComponent,
+    NotFoundComponent,
   ],
   imports: [
     JwtModule.forRoot({
@@ -99,6 +103,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
   ],
   providers: [ httpInterceptorProviders, 
               AuthGuardService,
+              RoleGuard,
               MatDatepickerModule,  
               {provide: RequestOptions, 
               useClass: AuthRequestOptions}],

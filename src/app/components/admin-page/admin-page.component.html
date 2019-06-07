@@ -1,0 +1,26 @@
+<div class ="container">
+  <p class="porukica"> Lista registriranih korisnika </p>
+
+  <mat-accordion class="users" *ngFor="let user of users ; let i = index">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+        <p></p>
+          <b>{{ user.username}} </b>
+        <p></p>
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p> <b> Ime: </b>{{user.name}}</p>
+      <p> <b> Prezime: </b>{{user.lastname}}</p>
+      <p> <b> Email: </b>{{user.email}}</p>
+      <p> <b> Kreiran: </b>{{user.created_at}}</p>
+      <button type="button" class="btn-danger" (click)="delete(user.username)"> 
+          <i class="material-icons" matSuffix>delete</i>
+        </button>
+  
+    </mat-expansion-panel>
+    
+  </mat-accordion>
+</div>

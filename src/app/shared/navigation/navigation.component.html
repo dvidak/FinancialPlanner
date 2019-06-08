@@ -1,7 +1,7 @@
 <ul>
     <li><a *ngIf='isVisible()' routerLink="/profil">Profil</a></li>
-    <li><a *ngIf='isVisible() && !isAdmin()' routerLink="/evidencija">Evidencija</a></li>
-    <li><a *ngIf='isVisible()  && !isAdmin()' routerLink="/pregled">Troškovi</a></li>
+    <li><a *ngIf='isVisible() && !isAdmin()' routerLink="/evidencija">Grafički prikaz</a></li>
+    <li><a *ngIf='isVisible()  && !isAdmin()' routerLink="/pregled">Evidencija</a></li>
     <li><a *ngIf='isVisible()  && !isAdmin()' routerLink="/štednja">Štednja</a></li>
     <li><i *ngIf='isVisible()  && !isAdmin()' (click)="openProfile()"> {{ username }}</i></li>
     <li><a *ngIf='isAdmin() && isVisible()' routerLink="/admin"> Pregled korisnika </a></li>

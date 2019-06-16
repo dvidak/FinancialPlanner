@@ -8,13 +8,10 @@ export class AuthGuardService implements CanActivate {
                 public router: Router) {}
   
   canActivate() {
-    console.log("ušao u can activate");
     if (!this.auth.isLoggedin()) {
-        console.log("nije logiran")
         this.router.navigateByUrl('/login');
         return false;
     }
-      console.log("logiran je");
       return true;
     }
 }

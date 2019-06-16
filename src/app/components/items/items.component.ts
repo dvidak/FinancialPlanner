@@ -53,7 +53,7 @@ export class ItemsComponent implements OnInit {
       this.itemExist = false;
     }
     this.itemExist=true;
-    console.log(this.items);
+    console.log("Idem račuat");
     this.calculateCharBar();
   }
 
@@ -64,6 +64,7 @@ export class ItemsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {
       this.getItems();
+      console.log("Nakon zatvaranja")
     });
   }
 
@@ -127,6 +128,19 @@ export class ItemsComponent implements OnInit {
     barmode: 'group'};
   
   Plotly.newPlot('myDiv', data,layout);
+  this.refresh();
+}
+
+
+
+refresh(){
+  this.currentMonthExpense = 0;
+  this.lastMonthExpense = 0;
+  this.twoMonthAgoExpense = 0;
+  this.currentMonthIncome = 0;
+  this.lastMonthIncome = 0;
+  this.twoMonthAgoIncome = 0;
+
 }
 
 }

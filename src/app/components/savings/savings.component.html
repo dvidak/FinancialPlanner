@@ -6,10 +6,10 @@
     <mat-expansion-panel  *ngIf="saving.created_by === id ">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Moja štednja 
+            {{saving.date}}
         </mat-panel-title> 
         <mat-panel-description>
-            {{saving.date}}
+            {{saving.description}}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="body">
@@ -41,10 +41,10 @@
         <mat-expansion-panel *ngIf="saving.created_with === id">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                 Štednja u kojoj sudjeluem
-              </mat-panel-title>
+                    {{saving.date}}
+                </mat-panel-title>
               <mat-panel-description>
-                  {{saving.date}}
+                  {{saving.description}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <p> <b> Štedimo za : </b> {{saving.description}}</p>

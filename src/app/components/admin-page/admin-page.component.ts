@@ -35,8 +35,12 @@ export class AdminPageComponent implements OnInit {
   delete(username : string){
     console.log(username);
     this.userService.deleteUser(username).subscribe();
-    window.location.reload();
-    
+    alert("Korisnik uspješno obrisan")
+    this.reload();   
+  }
+
+  reload(){
+    this.getUsers();
   }
 
 }

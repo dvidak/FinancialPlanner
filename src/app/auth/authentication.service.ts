@@ -63,6 +63,7 @@ export class AuthService {
       localStorage.removeItem(TOKEN_NAME);
       localStorage.removeItem(USERNAME_KEY);
       localStorage.removeItem(USER_ID);
+      localStorage.removeItem(ROLE_ID);
       console.log("sve smo obrisali")
     }
 

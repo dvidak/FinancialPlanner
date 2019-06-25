@@ -41,6 +41,7 @@ export class AddSavingModalComponent implements OnInit {
   ngOnInit() {
     this.getSubcategory();
     this.getUsers();
+    this.deleteLogged();
   }
 
   getSubcategory(){
@@ -61,6 +62,14 @@ export class AddSavingModalComponent implements OnInit {
       this.users=users;
       this.insertUsers(users);
     })
+  }
+
+  deleteLogged(){
+    this.users.forEach((user,index) => {
+      if (user.id =+ this.authService.getUserID){
+          this.users.splice(index,1);
+      }  
+    });
   }
 
   insertUsers(users : UserView[]){

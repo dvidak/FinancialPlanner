@@ -97,9 +97,15 @@ export class SavingsComponent implements OnInit {
       savingsId, 
       this.form.add
       );
-    this.savingsServce.updateSavings(this.updateSavingInfo).subscribe();
-    //To nije dobro
+    this.savingsServce.updateSavings(this.updateSavingInfo).subscribe(
+      data => {
+        alert("Dodano u štednju!");
+        this.getSavings();
+      },
+      error => {
+        alert("Error prilikom dodavanja");
+        console.log(error);
+      });;
     this.visibleInput[savingsId] = false;
-    this.getSavings();
   }
 }

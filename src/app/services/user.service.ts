@@ -24,12 +24,13 @@ export class UserService {
     }
 
     getUsers(): Observable<UserView[]> {
-        return this.http.get<UserView[]>(`http://localhost:1000/api/users`);
+        this.userId = this.auth.getUserID()
+        return this.http.get<UserView[]>(`http://localhost:1000/api/users/${this.userId}`);
     }
 
     getUserProfile(): Observable<UserView> {
         this.userId = this.auth.getUserID()
-        return this.http.get<UserView>(`http://localhost:1000/api/users/${this.userId}`);
+        return this.http.get<UserView>(`http://localhost:1000/api/user/${this.userId}`);
     }
 
     deleteUser(username: string) {
